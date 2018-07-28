@@ -23,7 +23,7 @@ export class DataService {
 
         let rebel = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6]);
         rebel.talent = rebel.value(ship[7]);
-        rebel.system = rebel.value(ship[8]);
+        rebel.sensor = rebel.value(ship[8]);
         rebel.cannon1 = rebel.value(ship[9]);
         rebel.cannon2 = rebel.value(ship[10]);
         rebel.torpedo1 = rebel.value(ship[11]);
@@ -86,7 +86,7 @@ export class DataService {
 
         let imperial = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6]);
         imperial.talent = imperial.value(ship[7]);
-        imperial.system = imperial.value(ship[8]);
+        imperial.sensor = imperial.value(ship[8]);
         imperial.torpedo1 = imperial.value(ship[9]);
         imperial.missile1 = imperial.value(ship[10]);
         imperial.missile2 = imperial.value(ship[11]);
@@ -118,9 +118,19 @@ export class DataService {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let upgrade = data[row];
-        let imperialUpgrade = new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], upgrade[5]);
+        let imperialUpgrade = new Upgrade(upgrade[0], upgrade[2], upgrade[1], upgrade[3], upgrade[4], upgrade[5]);
 
         upgrades.push(imperialUpgrade);
+      }
+    });
+
+    this.http.get(this.basePath('Upgrades', 'F')).subscribe(val => {
+      let data = (val as Spreadsheet).values;
+      for (let row in data) {
+        let upgrade = data[row];
+        let genericUpgrade = new Upgrade(upgrade[0], upgrade[2], upgrade[1], upgrade[3], upgrade[4], upgrade[5]);
+
+        upgrades.push(genericUpgrade);
       }
     });
 
@@ -137,7 +147,7 @@ export class DataService {
 
         let scum = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6]);
         scum.talent = scum.value(ship[7]);
-        scum.system = scum.value(ship[8]);
+        scum.sensor = scum.value(ship[8]);
         scum.cannon1 = scum.value(ship[9]);
         scum.cannon2 = scum.value(ship[10]);
         scum.device1 = scum.value(ship[11]);
@@ -173,9 +183,19 @@ export class DataService {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let upgrade = data[row];
-        let scumUpgrade = new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], upgrade[5]);
+        let scumUpgrade = new Upgrade(upgrade[0], upgrade[2], upgrade[1], upgrade[3], upgrade[4], upgrade[5]);
 
         upgrades.push(scumUpgrade);
+      }
+    });
+
+    this.http.get(this.basePath('Upgrades', 'F')).subscribe(val => {
+      let data = (val as Spreadsheet).values;
+      for (let row in data) {
+        let upgrade = data[row];
+        let genericUpgrade = new Upgrade(upgrade[0], upgrade[2], upgrade[1], upgrade[3], upgrade[4], upgrade[5]);
+
+        upgrades.push(genericUpgrade);
       }
     });
 
@@ -189,7 +209,7 @@ export class DataService {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let upgrade = data[row];
-        let genericUpgrade = new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], upgrade[5]);
+        let genericUpgrade = new Upgrade(upgrade[0], upgrade[2], upgrade[1], upgrade[3], upgrade[4], upgrade[5]);
 
         upgrades.push(genericUpgrade);
       }

@@ -1,24 +1,24 @@
-#rebel-search {
+.search {
   margin-top: 5px;
   padding-left: 10px;
   padding-right: 10px;
 }
 
-.rebel-controls {
+.controls {
   width: 100%;
   margin-top: 15px;
 }
 
-.rebel-controls .btn {
+.controls .btn {
   margin-right: 5px;
 }
 
-.rebel-ships {
+.ships {
   width: 100%;
   padding: 0 25px 0 25px;
   margin-top: 15px;
 }
 
-.rebel-ships .ship {
+.ships .ship {
   width: 100%;
 }

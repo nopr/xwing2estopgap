@@ -8,7 +8,7 @@ export class Ship {
   shipAbility: string;
   pilotAbility: string;
   talent: string;
-  system: string;
+  sensor: string;
   cannon1: string;
   cannon2: string;
   torpedo1: string;

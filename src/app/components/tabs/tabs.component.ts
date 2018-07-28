@@ -28,6 +28,8 @@ export class TabsComponent implements OnInit {
   scumSquad: Ship[];
 
   rebelPoints: number;
+  imperialPoints: number;
+  scumPoints: number;
 
   constructor(dataService: DataService) {
     this.dataService = dataService;
@@ -61,7 +63,7 @@ export class TabsComponent implements OnInit {
     squad.forEach(s => {
       points += s.cost;
       points += this.pointsForUpgrade(factionUpgrades, s.talent);
-      points += this.pointsForUpgrade(factionUpgrades, s.system);
+      points += this.pointsForUpgrade(factionUpgrades, s.sensor);
       points += this.pointsForUpgrade(factionUpgrades, s.cannon1);
       points += this.pointsForUpgrade(factionUpgrades, s.cannon2);
       points += this.pointsForUpgrade(factionUpgrades, s.torpedo1);
