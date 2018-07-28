@@ -29,11 +29,13 @@
       </div>
       <div class="rebel-ships">
         <div class="ship">
-          <div class="row" *ngFor="let rebel of rebelSquad" >
+          <div class="row" *ngFor="let rebel of rebelSquad; index as i" [attr.data-index]="i">
             <div class="card">
               <div class="card-header d-flex w-100 justify-content-between">
-                <h5>{{rebel.name}} - {{rebel.pilot}}</h5>
-                <small>{{rebel.cost}}</small>
+                <h5>{{rebel.name}} - {{rebel.pilot}} <small>({{rebel.cost}})</small></h5>
+                <button type="button" class="btn btn-danger" (click)="removeShip(rebelSquad, i)">
+                  <i class="fa fa-trash"></i>
+                </button>
               </div>
               <div class="card-body">
                 <div class="row">

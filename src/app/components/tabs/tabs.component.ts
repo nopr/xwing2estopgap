@@ -95,8 +95,12 @@ export class TabsComponent implements OnInit {
   }
 
   addShip(squad, ship): void {
-    squad.push(ship);
+    squad.push({...ship});
     this.searchValue = '';
+  }
+
+  removeShip(squad, index): void {
+    squad.splice(index, 1);
   }
 
   getShipByPilot(faction: Ship[], pilot: string): Ship {
