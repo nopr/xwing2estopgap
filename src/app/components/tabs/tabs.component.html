@@ -1,7 +1,51 @@
 <ngb-tabset>
   <ngb-tab title="Rebel Alliance">
     <ng-template ngbTabContent>
-
+      <div class="rebel-controls">
+        <div class="row">
+          <div class="col-6">
+            <div>Points: {{ squadPoints(rebelShips, rebelSquad) }}</div>
+          </div>
+          <div class="col-6">
+            <button id="rebel-hide-abilities" class="button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
+            <button id="rebel-add-ship" class="button" class="btn btn-primary" (click)="addShip(rebelSquad)" [disabled]="!hasShipDataLoaded()">Add Ship</button>
+            <button id="rebel-export-link" class="button" class="btn btn-primary">Export Link</button>
+          </div>
+        </div>
+      </div>
+      <div class="rebel-ships">
+        <div class="container"><div class="row" *ngFor="let squadShip of rebelSquad">
+            <div class="col-6">
+              <select [(ngModel)]="squadShip.name" (change)="squadShip.pilot = ''">
+                <option *ngFor="let ship of rebelShipNames()" [ngValue]="ship">{{ship}}</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <select [(ngModel)]="squadShip.pilot" [disabled]="!hasUpgradeDataLoaded()">
+                <option *ngFor="let ship of rebelShips | forShip: squadShip.name" [ngValue]="ship.pilot"><span *ngIf="ship.unique">*</span>{{ship.pilot}}</option>
+              </select>
+            </div>
+            <div class="container" *ngIf="showAbilities">
+              <div class="row">
+                <div class="col-6">
+                  <div class="card ship-ability">
+                    <div class="card-body">
+                      {{getShipAbility(rebelShips, squadShip.name)}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="card pilot-ability">
+                    <div class="card-body">
+                      {{getPilotAbility(rebelShips, squadShip)}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </ng-template>
   </ngb-tab>
   <ngb-tab title="Galactic Empire">
