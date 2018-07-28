@@ -1,46 +1,409 @@
 <ngb-tabset>
   <ngb-tab title="Rebel Alliance">
     <ng-template ngbTabContent>
+      <div id="rebel-search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for ship or pilot..." [(ngModel)]="searchValue">
+        </div>
+        <div class="list-group">
+          <li *ngFor="let rebel of rebelShips | searchFilter: searchValue" (click)="addShip(rebelSquad, rebel)" class="list-group-item flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5>{{rebel.name}} - {{rebel.pilot}}</h5>
+              <small>{{rebel.cost}}</small>
+            </div>
+            <p>{{rebel.pilotAbility}}</p>
+            <small>{{rebel.shipAbility}}</small>
+          </li>
+        </div>
+      </div>
       <div class="rebel-controls">
         <div class="row">
           <div class="col-6">
-            <div>Points: {{ squadPoints(rebelShips, rebelSquad) }}</div>
+            <div>Points: {{ squadPoints(rebelShips, rebelUpgrades, rebelSquad) }}</div>
           </div>
           <div class="col-6">
             <button id="rebel-hide-abilities" class="button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
-            <button id="rebel-add-ship" class="button" class="btn btn-primary" (click)="addShip(rebelSquad)" [disabled]="!hasShipDataLoaded()">Add Ship</button>
             <button id="rebel-export-link" class="button" class="btn btn-primary">Export Link</button>
           </div>
         </div>
       </div>
       <div class="rebel-ships">
-        <div class="container"><div class="row" *ngFor="let squadShip of rebelSquad">
-            <div class="col-6">
-              <select [(ngModel)]="squadShip.name" (change)="squadShip.pilot = ''">
-                <option *ngFor="let ship of rebelShipNames()" [ngValue]="ship">{{ship}}</option>
-              </select>
-            </div>
-            <div class="col-6">
-              <select [(ngModel)]="squadShip.pilot" [disabled]="!hasUpgradeDataLoaded()">
-                <option *ngFor="let ship of rebelShips | forShip: squadShip.name" [ngValue]="ship.pilot"><span *ngIf="ship.unique">*</span>{{ship.pilot}}</option>
-              </select>
-            </div>
-            <div class="container" *ngIf="showAbilities">
-              <div class="row">
-                <div class="col-6">
-                  <div class="card ship-ability">
-                    <div class="card-body">
-                      {{getShipAbility(rebelShips, squadShip.name)}}
+        <div class="ship">
+          <div class="row" *ngFor="let rebel of rebelSquad" >
+            <div class="card">
+              <div class="card-header d-flex w-100 justify-content-between">
+                <h5>{{rebel.name}} - {{rebel.pilot}}</h5>
+                <small>{{rebel.cost}}</small>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-4" *ngIf="rebel.talent != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Talent:</div>
+                      <select [(ngModel)]="rebel.talent" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Talent'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.talent !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.talent)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.system != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>System:</div>
+                      <select [(ngModel)]="rebel.system" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'System'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.system !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.system)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.cannon1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Cannon:</div>
+                      <select [(ngModel)]="rebel.cannon1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Cannon'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.cannon1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.cannon1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.cannon2 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Cannon:</div>
+                      <select [(ngModel)]="rebel.cannon2" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Cannon'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.cannon2 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.cannon2)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.torpedo1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Torpedo:</div>
+                      <select [(ngModel)]="rebel.torpedo1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Torpedo'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.torpedo1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.torpedo1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.modification1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Modification:</div>
+                      <select [(ngModel)]="rebel.modification1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Torpedo'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.modification1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.modification1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.modification2 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Modification:</div>
+                      <select [(ngModel)]="rebel.modification2" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Modification'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.modification2 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.modification2)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.modification3 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Modification:</div>
+                      <select [(ngModel)]="rebel.modification3" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Modification'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.modification3 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.modification3)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.crew1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Crew:</div>
+                      <select [(ngModel)]="rebel.crew1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Crew'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.crew1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.crew1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.crew2 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Crew:</div>
+                      <select [(ngModel)]="rebel.crew2" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Crew'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.crew2 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.crew2)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.crew3 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Crew:</div>
+                      <select [(ngModel)]="rebel.crew3" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Crew'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.crew3 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.crew3)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.gunner1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Gunner:</div>
+                      <select [(ngModel)]="rebel.gunner1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Gunner'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.gunner1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.gunner1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.astromech != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Astromech:</div>
+                      <select [(ngModel)]="rebel.astromech" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Astromech'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.astromech !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.astromech)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.force != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Force:</div>
+                      <select [(ngModel)]="rebel.force" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Force'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.force !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.force)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.turret != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Turret:</div>
+                      <select [(ngModel)]="rebel.turret" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Turret'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.turret !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.turret)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.title != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Title:</div>
+                      <select [(ngModel)]="rebel.title" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Title'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.title !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.title)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.device1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Device:</div>
+                      <select [(ngModel)]="rebel.device1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Device'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.device1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.device1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.device2 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Device:</div>
+                      <select [(ngModel)]="rebel.device2" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Device'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.device2 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.device2)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.missile1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Missile:</div>
+                      <select [(ngModel)]="rebel.missile1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Missile'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.missile1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.missile1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.missile2 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Missile:</div>
+                      <select [(ngModel)]="rebel.missile2" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Missile'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.missile2 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.missile2)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.configuration != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Configuration:</div>
+                      <select [(ngModel)]="rebel.configuration" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Configuration'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.configuration !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.configuration)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.illicit1 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Illicit:</div>
+                      <select [(ngModel)]="rebel.illicit1" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Illicit'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.illicit1 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.illicit1)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.illicit2 != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Illicit:</div>
+                      <select [(ngModel)]="rebel.illicit2" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Illicit'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.illicit2 !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.illicit2)}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4" *ngIf="rebel.tech != undefined">
+                    <div class="d-flex w-100 justify-content-between">
+                      <div>Tech:</div>
+                      <select [(ngModel)]="rebel.tech" (change)="squadPoints(rebelShips, rebelUpgrades, rebelSquad)">
+                        <option class="text-center">-- EMPTY --</option>
+                        <option *ngFor="let upgrade of rebelUpgrades | forUpgrade: 'Tech'" [ngValue]="upgrade.name">
+                          <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
+                      </select>
+                    </div>
+                    <div class="upgrade card" *ngIf="showAbilities && rebel.tech !== ''">
+                      <div class="card-body text-left">
+                        {{getUpgradeByName(rebelUpgrades,rebel.tech)}}
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-6">
-                  <div class="card pilot-ability">
-                    <div class="card-body">
-                      {{getPilotAbility(rebelShips, squadShip)}}
-                    </div>
-                  </div>
-                </div>
+              </div>
+              <div class="card-footer text-left" *ngIf="rebel.pilotAbility != '' && showAbilities">
+                <small>{{rebel.pilotAbility}}</small>
+              </div>
+              <div class="card-footer text-left" *ngIf="rebel.shipAbility != '' && showAbilities">
+                <small>{{rebel.shipAbility}}</small>
               </div>
             </div>
           </div>

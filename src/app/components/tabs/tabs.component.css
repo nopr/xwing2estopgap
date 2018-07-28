@@ -1,6 +1,12 @@
+#rebel-search {
+  margin-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .rebel-controls {
   width: 100%;
-  margin-top: 5px;
+  margin-top: 15px;
 }
 
 .rebel-controls .btn {
@@ -9,12 +15,26 @@
 
 .rebel-ships {
   width: 100%;
+  padding: 0 25px 0 25px;
+  margin-top: 15px;
+}
+
+.rebel-ships .ship, .rebel-ships .card{
+  width: 100%;
+}
+
+.rebel-ships .ship .upgrade.card {
+  margin-top: 5px;
+}
+
+.rebel-ships .ship .card-body .row .col-4 {
+  margin-bottom: 5px;
+}
+
+.rebel-ships .ship .upgrade.card .card-body {
+  padding: 0.5rem;
 }
 
 .rebel-ships .ship-ability, .rebel-ships .pilot-ability {
   margin-top: 5px;
-}
-
-.rebel-ships .row {
-  margin-top: 10px;
 }

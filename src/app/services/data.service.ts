@@ -57,9 +57,19 @@ export class DataService {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let upgrade = data[row];
-        let rebelUpgrade = new Upgrade(upgrade[0], upgrade[1], upgrade[2], upgrade[3], upgrade[4], upgrade[5]);
+        let rebelUpgrade = new Upgrade(upgrade[0], upgrade[2], upgrade[1], upgrade[3], upgrade[4], upgrade[5]);
 
         upgrades.push(rebelUpgrade);
+      }
+    });
+
+    this.http.get(this.basePath('Upgrades', 'F')).subscribe(val => {
+      let data = (val as Spreadsheet).values;
+      for (let row in data) {
+        let upgrade = data[row];
+        let genericUpgrade = new Upgrade(upgrade[0], upgrade[2], upgrade[1], upgrade[3], upgrade[4], upgrade[5]);
+
+        upgrades.push(genericUpgrade);
       }
     });
 

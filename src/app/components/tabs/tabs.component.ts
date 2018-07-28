@@ -12,6 +12,7 @@ export class TabsComponent implements OnInit {
 
   dataService: DataService;
 
+  searchValue: string;
   showAbilities: boolean;
 
   rebelShips: Ship[];
@@ -30,6 +31,9 @@ export class TabsComponent implements OnInit {
 
   constructor(dataService: DataService) {
     this.dataService = dataService;
+    this.rebelSquad = [];
+    this.imperialSquad = [];
+    this.scumSquad = [];
   }
 
   ngOnInit() {
@@ -47,62 +51,63 @@ export class TabsComponent implements OnInit {
     this.rebelSquad = [];
   }
 
-  hasShipDataLoaded(): boolean {
-    return Object.keys(this.rebelShips).length > 0 &&
-           Object.keys(this.imperialShips).length > 0 &&
-           Object.keys(this.scumShips).length > 0;
-  }
-
-  hasUpgradeDataLoaded(): boolean {
-    return this.rebelUpgrades.length > 0 &&
-           this.imperialUpgrades.length > 0 &&
-           this.scumUpgrades.length > 0;
-  }
-
   toggleShowAbilities(): void {
     this.showAbilities = !this.showAbilities;
   }
 
-  squadPoints(faction: Ship[], squad: Ship[]) {
-    var points = 0;
+  squadPoints(faction: Ship[], factionUpgrades: Upgrade[], squad: Ship[]) {
+    let points = 0;
 
     squad.forEach(s => {
-      var pilot = this.getShipByPilot(faction, s.pilot);
-      if (pilot) points += pilot.cost;
+      points += s.cost;
+      points += this.pointsForUpgrade(factionUpgrades, s.talent);
+      points += this.pointsForUpgrade(factionUpgrades, s.system);
+      points += this.pointsForUpgrade(factionUpgrades, s.cannon1);
+      points += this.pointsForUpgrade(factionUpgrades, s.cannon2);
+      points += this.pointsForUpgrade(factionUpgrades, s.torpedo1);
+      points += this.pointsForUpgrade(factionUpgrades, s.modification1);
+      points += this.pointsForUpgrade(factionUpgrades, s.modification2);
+      points += this.pointsForUpgrade(factionUpgrades, s.modification3);
+      points += this.pointsForUpgrade(factionUpgrades, s.crew1);
+      points += this.pointsForUpgrade(factionUpgrades, s.crew2);
+      points += this.pointsForUpgrade(factionUpgrades, s.crew3);
+      points += this.pointsForUpgrade(factionUpgrades, s.gunner1);
+      points += this.pointsForUpgrade(factionUpgrades, s.astromech);
+      points += this.pointsForUpgrade(factionUpgrades, s.force);
+      points += this.pointsForUpgrade(factionUpgrades, s.turret);
+      points += this.pointsForUpgrade(factionUpgrades, s.title);
+      points += this.pointsForUpgrade(factionUpgrades, s.device1);
+      points += this.pointsForUpgrade(factionUpgrades, s.device2);
+      points += this.pointsForUpgrade(factionUpgrades, s.missile1);
+      points += this.pointsForUpgrade(factionUpgrades, s.missile2);
+      points += this.pointsForUpgrade(factionUpgrades, s.configuration);
+      points += this.pointsForUpgrade(factionUpgrades, s.illicit1);
+      points += this.pointsForUpgrade(factionUpgrades, s.illicit2);
+      points += this.pointsForUpgrade(factionUpgrades, s.tech);
     });
 
     return points;
   }
 
-  addShip(squad): void {
-    squad.push(new Ship('','','','','','',''));
+  private pointsForUpgrade(upgrades: Upgrade[], upgrade: string) {
+    upgrades = upgrades.filter(u => u.name == upgrade);
+    return upgrades.length > 0 ? upgrades[0].cost : 0;
   }
 
-  rebelShipNames(): string[] {
-    let output = [];
-
-   this.rebelShips.forEach(s => {
-     if (output.indexOf(s.name) === -1) output.push(s.name);
-   })
-
-    return output;
-  }
-
-  getPilotAbility(faction: Ship[], ship: Ship): string {
-    var pilots = faction.filter(factionShip => factionShip.pilot == ship.pilot);
-
-    return pilots.length > 0 ? pilots[0].pilotAbility : '';
-  }
-
-  getShipAbility(faction: Ship[], shipName: string): string {
-    var ships = faction.filter(ship => ship.name == shipName);
-
-    return ships.length > 0 ? ships[0].shipAbility : ''
+  addShip(squad, ship): void {
+    squad.push(ship);
+    this.searchValue = '';
   }
 
   getShipByPilot(faction: Ship[], pilot: string): Ship {
-    var pilots = faction.filter(factionShip => factionShip.pilot == pilot);
+    let pilots = faction.filter(factionShip => factionShip.pilot == pilot);
 
     return pilots.length > 0 ? pilots[0] : undefined;
+  }
+
+  getUpgradeByName(upgrades: Upgrade[], upgrade: string): string {
+    upgrades = upgrades.filter(u => u.name == upgrade);
+
+    return upgrades.length > 0 ? upgrades[0].ability : '';
   }
 }

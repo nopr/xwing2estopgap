@@ -9,13 +9,15 @@ import { TabsComponent } from './components/tabs/tabs.component';
 
 import { ForShip } from './pipes/ship.pipe';
 import { ForUpgrade } from './pipes/upgrade.pipe';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     TabsComponent,
     ForShip,
-    ForUpgrade
+    ForUpgrade,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
