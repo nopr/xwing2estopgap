@@ -31,5 +31,19 @@ export class Ship {
   illicit1: string;
   illicit2: string;
   tech: string;
+
+  constructor(name: string, cost: string, pilot: string, unique: string, faction: string, shipAbility: string, pilotAbility: string) {
+    this.name = name;
+    this.cost = parseInt(cost);
+    this.pilot = pilot;
+    this.unique = unique === 'TRUE' ? true : false;
+    this.faction = faction;
+    this.shipAbility = shipAbility;
+    this.pilotAbility = pilotAbility;
+  }
+
+  value(value: string): string {
+    return value === 'TRUE' ? '' : undefined;
+  }
 }
 

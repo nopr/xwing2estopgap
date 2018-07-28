@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  title = 'X-Wing 2nd Edition Stop Gap';
+
+  constructor(public dataService: DataService) {
+    dataService.getRebels();
+    dataService.getRebelUpgrades();
+    dataService.getImperials();
+    dataService.getImperialUpgrades();
+    dataService.getScum();
+    dataService.getScumUpgrades();
+    dataService.getUpgrades();
+  }
 }
