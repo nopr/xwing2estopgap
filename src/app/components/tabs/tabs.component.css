@@ -19,22 +19,6 @@
   margin-top: 15px;
 }
 
-.rebel-ships .ship, .rebel-ships .card{
+.rebel-ships .ship {
   width: 100%;
-}
-
-.rebel-ships .ship .upgrade.card {
-  margin-top: 5px;
-}
-
-.rebel-ships .ship .card-body .row .col-4 {
-  margin-bottom: 5px;
-}
-
-.rebel-ships .ship .upgrade.card .card-body {
-  padding: 0.5rem;
-}
-
-.rebel-ships .ship-ability, .rebel-ships .pilot-ability {
-  margin-top: 5px;
 }

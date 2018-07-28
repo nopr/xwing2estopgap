@@ -11,6 +11,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
 import { ForShip } from './pipes/ship.pipe';
 import { ForUpgrade } from './pipes/upgrade.pipe';
 import { SearchFilterPipe } from './pipes/search-filter.pipe';
+import { ShipComponent } from './components/ship/ship.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { SearchFilterPipe } from './pipes/search-filter.pipe';
     TabsComponent,
     ForShip,
     ForUpgrade,
-    SearchFilterPipe
+    SearchFilterPipe,
+    ShipComponent
   ],
   imports: [
     BrowserModule,

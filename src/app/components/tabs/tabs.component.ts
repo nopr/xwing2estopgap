@@ -103,12 +103,6 @@ export class TabsComponent implements OnInit {
     squad.splice(index, 1);
   }
 
-  getShipByPilot(faction: Ship[], pilot: string): Ship {
-    let pilots = faction.filter(factionShip => factionShip.pilot == pilot);
-
-    return pilots.length > 0 ? pilots[0] : undefined;
-  }
-
   getUpgradeByName(upgrades: Upgrade[], upgrade: string): string {
     upgrades = upgrades.filter(u => u.name == upgrade);
 
