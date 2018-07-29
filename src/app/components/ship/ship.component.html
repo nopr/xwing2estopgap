@@ -1,9 +1,10 @@
 <div class="card">
   <div class="card-header d-flex w-100 justify-content-between">
     <h5>{{ship.name}} - {{ship.pilot}} <small>({{ship.cost}})</small></h5>
-    <button type="button" class="btn btn-danger" (click)="removeShip(squad, index)">
-      <i class="fa fa-trash"></i>
-    </button>
+    <div class="btn-group">
+      <button type="button" class="btn btn-secondary" *ngIf="!ship.unique" (click)="duplicateShip(squad, index)"><i class="fa fa-copy"></i></button>
+      <button type="button" class="btn btn-danger" (click)="removeShip(squad, index)"><i class="fa fa-trash"></i></button>
+    </div>
   </div>
   <div class="card-body">
     <div class="row">

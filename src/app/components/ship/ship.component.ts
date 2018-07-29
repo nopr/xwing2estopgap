@@ -24,6 +24,11 @@ export class ShipComponent implements OnInit {
   ngOnInit() {
   }
 
+  duplicateShip(squad, index): void {
+    const ship = squad[index];
+    squad.push({...ship});
+  }
+
   removeShip(squad, index): void {
     squad.splice(index, 1);
   }
