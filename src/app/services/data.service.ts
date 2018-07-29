@@ -29,8 +29,10 @@ export class DataService {
         rebel.torpedo1 = rebel.value(ship[11]);
         rebel.modification1 = rebel.value(ship[12]);
         rebel.modification2 = rebel.value(ship[13]);
+        rebel.modification3 = undefined;
         rebel.crew1 = rebel.value(ship[14]);
         rebel.crew2 = rebel.value(ship[15]);
+        rebel.crew3 = undefined;
         rebel.gunner1 = rebel.value(ship[16]);
         rebel.astromech = rebel.value(ship[17]);
         rebel.force = rebel.value(ship[18]);
@@ -42,6 +44,8 @@ export class DataService {
         rebel.missile2 = rebel.value(ship[24]);
         rebel.configuration = rebel.value(ship[25]);
         rebel.illicit1 = rebel.value(ship[26]);
+        rebel.illicit2 = undefined;
+        rebel.tech = undefined;
 
         ships.push(rebel);
       }
@@ -92,17 +96,23 @@ export class DataService {
         imperial.missile2 = imperial.value(ship[11]);
         imperial.modification1 = imperial.value(ship[12]);
         imperial.modification2 = imperial.value(ship[13]);
+        imperial.modification3 = undefined;
         imperial.configuration = imperial.value(ship[14]);
         imperial.cannon1 = imperial.value(ship[15]);
+        imperial.cannon2 = undefined;
         imperial.crew1 = imperial.value(ship[16]);
         imperial.crew2 = imperial.value(ship[17]);
+        imperial.crew3 = undefined
         imperial.title = imperial.value(ship[18]);
         imperial.force = imperial.value(ship[19]);
         imperial.turret = imperial.value(ship[20]);
         imperial.gunner1 = imperial.value(ship[21]);
         imperial.device1 = imperial.value(ship[22]);
         imperial.device2 = imperial.value(ship[23]);
-        imperial.cannon2 = imperial.value(ship[10]);
+        imperial.astromech = undefined;
+        imperial.illicit1 = undefined;
+        imperial.illicit2 = undefined;
+        imperial.tech = undefined;
 
         ships.push(imperial);
       }
@@ -163,11 +173,14 @@ export class DataService {
         scum.gunner1 = scum.value(ship[21]);
         scum.astromech = scum.value(ship[22]);
         scum.missile1 = scum.value(ship[23]);
+        scum.missile2 = undefined;
         scum.crew1 = scum.value(ship[24]);
         scum.crew2 = scum.value(ship[25]);
         scum.crew3 = scum.value(ship[26]);
         scum.force = scum.value(ship[27]);
         scum.tech = scum.value(ship[27]);
+        scum.force = undefined;
+        scum.configuration = undefined;
 
         ships.push(scum);
       }

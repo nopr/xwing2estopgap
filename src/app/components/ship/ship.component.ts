@@ -33,7 +33,7 @@ export class ShipComponent implements OnInit {
   }
 
   getUpgradeByName(upgrades: Upgrade[], upgrade: string): string {
-    upgrades = upgrades.filter(u => u.name == upgrade);
+    upgrades = upgrades.filter(u => upgrade.indexOf(u.name) > -1);
 
     return upgrades.length > 0 ? upgrades[0].ability : '';
   }
