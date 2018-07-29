@@ -63,6 +63,7 @@ export class TabsComponent implements OnInit {
     if (queryParams.has('squad')) {
       this.importSquad(queryParams.get('squad'));
     }
+
   }
 
   toggleShowAbilities(): void {
@@ -131,7 +132,11 @@ export class TabsComponent implements OnInit {
   }
 
   private pointsForUpgrade(upgrades: Upgrade[], upgrade: string) {
-    upgrades = upgrades.filter(u => u.name == upgrade);
+    console.log(upgrade);
+
+    if (!upgrade) return 0;
+
+    upgrades = upgrades.filter(u => upgrade.split(",")[0].indexOf(u.name) > -1);
     return upgrades.length > 0 ? upgrades[0].cost : 0;
   }
 
@@ -148,5 +153,11 @@ export class TabsComponent implements OnInit {
     upgrades = upgrades.filter(u => u.name == upgrade);
 
     return upgrades.length > 0 ? upgrades[0].ability : '';
+  }
+
+  getUpgrade(upgrades: Upgrade[], upgrade: string): Upgrade {
+    upgrades = upgrades.filter(u => u.name === upgrade);
+
+    return upgrades.length > 0 ? upgrades[0] : undefined;
   }
 }

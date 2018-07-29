@@ -43,7 +43,9 @@ export class Ship {
   }
 
   value(value: string): string {
-    return value === 'TRUE' ? '' : undefined;
+    if (!value) return undefined;
+
+    return value === 'TRUE' ? '' : value === '' ? undefined : `,${value}`;
   }
 }
 
