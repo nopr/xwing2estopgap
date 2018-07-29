@@ -87,7 +87,7 @@
           <div>Modification:</div>
           <select [(ngModel)]="ship.modification1" (change)="updateSquadPoints()">
             <option class="text-center">-- EMPTY --</option>
-            <option *ngFor="let upgrade of upgrades | forUpgrade: 'Torpedo'" [ngValue]="upgrade.name">
+            <option *ngFor="let upgrade of upgrades | forUpgrade: 'Modification'" [ngValue]="upgrade.name">
               <span *ngIf="upgrade.unique">*</span>{{upgrade.name}} ({{upgrade.cost}})</option>
           </select>
         </div>
