@@ -83,6 +83,12 @@
           </div>
         </div>
       </div>
+      <div class="export-link container">
+        <div class="alert alert-success" *ngIf="showLink">
+          <div style="word-break: break-all">
+            {{imperialSquadLink}}</div>
+        </div>
+      </div>
       <div class="ships">
         <div class="ship">
           <div class="row" *ngFor="let imperial of imperialSquad; index as i">
@@ -126,9 +132,15 @@
           <div class="col-lg-6 col-md-6 col-sm-11">
             <div class="btn-group" role="group">
               <button class="hide-abilities button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
-              <button class="export-link button" class="btn btn-primary" data-toggle="modal" data-target="#scum-modal">Export Link</button>
+              <button class="export-link button" class="btn btn-primary" (click)="createExportLink('Scum', scumSquad)">Export Link</button>
             </div>
           </div>
+        </div>
+      </div>
+      <div class="export-link container">
+        <div class="alert alert-success" *ngIf="showLink">
+          <div style="word-break: break-all">
+            {{scumSquadLink}}</div>
         </div>
       </div>
       <div class="ships">
@@ -150,57 +162,3 @@
     </ng-template>
   </ngb-tab>
 </ngb-tabset>
-<div id="rebel-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Squad Link</h5>
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{rebelSquadLink}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="imperial-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Squad Link</h5>
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{imperialSquadLink}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div id="scum-modal" class="modal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Squad Link</h5>
-        <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        {{scumSquadLink}}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Close</button>
-      </div>
-    </div>
-  </div>
-</div>

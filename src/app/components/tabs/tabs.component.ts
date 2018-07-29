@@ -41,6 +41,8 @@ export class TabsComponent implements OnInit {
     this.rebelSquad = [];
     this.imperialSquad = [];
     this.scumSquad = [];
+
+    this.showLink = false;
   }
 
   ngOnInit() {
