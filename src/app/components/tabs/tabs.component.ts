@@ -14,6 +14,7 @@ export class TabsComponent implements OnInit {
 
   searchValue: string;
   showAbilities: boolean;
+  showLink: boolean;
 
   rebelShips: Ship[];
   imperialShips: Ship[];
@@ -31,6 +32,10 @@ export class TabsComponent implements OnInit {
   imperialPoints: number;
   scumPoints: number;
 
+  rebelSquadLink: string;
+  imperialSquadLink: string;
+  scumSquadLink: string;
+
   constructor(dataService: DataService) {
     this.dataService = dataService;
     this.rebelSquad = [];
@@ -39,6 +44,7 @@ export class TabsComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.showAbilities = true;
 
     this.rebelShips = this.dataService.getRebels();
@@ -50,7 +56,11 @@ export class TabsComponent implements OnInit {
     this.imperialUpgrades = this.dataService.getImperialUpgrades();
     this.scumUpgrades = this.dataService.getScumUpgrades();
 
-    this.rebelSquad = [];
+    const queryParams = new URLSearchParams(window.location.search);
+
+    if (queryParams.has('squad')) {
+      this.importSquad(queryParams.get('squad'));
+    }
   }
 
   toggleShowAbilities(): void {
@@ -88,7 +98,34 @@ export class TabsComponent implements OnInit {
       points += this.pointsForUpgrade(factionUpgrades, s.tech);
     });
 
+    this.showLink = false;
+
     return points;
+  }
+
+  createExportLink(faction: string, squad: Ship[]) : void {
+    let output = { faction: faction, squad: squad };
+    let value = btoa(JSON.stringify(output));
+    let link = `${window.location}?squad=${value}`;
+
+    switch (faction) {
+      case 'Rebels':
+        this.rebelSquadLink = link;
+      case 'Imperial':
+        this.imperialSquadLink = link;
+      case 'Scum':
+        this.scumSquadLink = link;
+    }
+
+    this.showLink = true;
+  }
+
+  importSquad(data: string): void {
+    let input = JSON.parse(atob(data));
+
+    if (input.faction === 'Rebels') this.rebelSquad = input.squad;
+    else if (input.faction === 'Imperial') this.rebelSquad = input.squad;
+    else if (input.faction === 'Scum') this.rebelSquad = input.squad;
   }
 
   private pointsForUpgrade(upgrades: Upgrade[], upgrade: string) {

@@ -8,11 +8,7 @@
   width: 100%;
   margin-top: 15px;
 }
-
-.controls .btn {
-  margin-right: 5px;
-}
-
+css
 .ships {
   width: 100%;
   padding: 0 25px 0 25px;
@@ -21,4 +17,8 @@
 
 .ships .ship {
   width: 100%;
+}
+
+.export-link {
+  margin-top: 15px;
 }

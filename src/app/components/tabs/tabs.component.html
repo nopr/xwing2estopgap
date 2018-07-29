@@ -22,9 +22,17 @@
             <div>Points: {{ squadPoints(rebelShips, rebelUpgrades, rebelSquad) }}</div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-11">
-            <button id="hide-abilities" class="button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
-            <button id="export-link" class="button" class="btn btn-primary">Export Link</button>
+            <div class="btn-group" role="group">
+              <button id="hide-abilities" class="button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
+              <button id="export-link" class="button" class="btn btn-primary" (click)="createExportLink('Rebels', rebelSquad)">Export Link</button>
+            </div>
           </div>
+        </div>
+      </div>
+      <div class="export-link container">
+        <div class="alert alert-success" *ngIf="showLink">
+          <div style="word-break: break-all">
+            {{rebelSquadLink}}</div>
         </div>
       </div>
       <div class="ships">
@@ -68,8 +76,10 @@
             <div>Points: {{ squadPoints(imperialShips, imperialUpgrades, imperialSquad) }}</div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-11">
-            <button class="hide-abilities button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
-            <button class="export-link button" class="btn btn-primary">Export Link</button>
+            <div class="btn-group" role="group">
+              <button class="hide-abilities button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
+              <button class="export-link button" class="btn btn-primary" (click)="createExportLink('Imperial', imperialSquad)">Export Link</button>
+            </div>
           </div>
         </div>
       </div>
@@ -114,8 +124,10 @@
             <div>Points: {{ squadPoints(scumShips, scumUpgrades, scumSquad) }}</div>
           </div>
           <div class="col-lg-6 col-md-6 col-sm-11">
-            <button class="hide-abilities button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
-            <button class="export-link button" class="btn btn-primary">Export Link</button>
+            <div class="btn-group" role="group">
+              <button class="hide-abilities button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
+              <button class="export-link button" class="btn btn-primary" data-toggle="modal" data-target="#scum-modal">Export Link</button>
+            </div>
           </div>
         </div>
       </div>
@@ -138,3 +150,57 @@
     </ng-template>
   </ngb-tab>
 </ngb-tabset>
+<div id="rebel-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Squad Link</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{rebelSquadLink}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="imperial-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Squad Link</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{imperialSquadLink}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="scum-modal" class="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Squad Link</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{scumSquadLink}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
