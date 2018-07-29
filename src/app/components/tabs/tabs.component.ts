@@ -144,8 +144,11 @@ export class TabsComponent implements OnInit {
 
     let cost;
     if (splitCosts.length === 3) {
-      console.log(ship);
       cost = ship.size === 'Small' ? splitCosts[0] : ship.size === 'Medium' ? splitCosts[1] : splitCosts[2];
+    }
+
+    if (splitCosts.length === 4) {
+      cost = ship.agility === 0 ? splitCosts[0] : ship.agility === 1 ? splitCosts[1] : ship.agility === 2 ? splitCosts[2] : splitCosts[3];
     }
 
     return parseInt(cost);
