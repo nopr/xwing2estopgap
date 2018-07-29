@@ -75,30 +75,30 @@ export class TabsComponent implements OnInit {
 
     squad.forEach(s => {
       points += s.cost;
-      points += this.pointsForUpgrade(factionUpgrades, s.talent);
-      points += this.pointsForUpgrade(factionUpgrades, s.sensor);
-      points += this.pointsForUpgrade(factionUpgrades, s.cannon1);
-      points += this.pointsForUpgrade(factionUpgrades, s.cannon2);
-      points += this.pointsForUpgrade(factionUpgrades, s.torpedo1);
-      points += this.pointsForUpgrade(factionUpgrades, s.modification1);
-      points += this.pointsForUpgrade(factionUpgrades, s.modification2);
-      points += this.pointsForUpgrade(factionUpgrades, s.modification3);
-      points += this.pointsForUpgrade(factionUpgrades, s.crew1);
-      points += this.pointsForUpgrade(factionUpgrades, s.crew2);
-      points += this.pointsForUpgrade(factionUpgrades, s.crew3);
-      points += this.pointsForUpgrade(factionUpgrades, s.gunner1);
-      points += this.pointsForUpgrade(factionUpgrades, s.astromech);
-      points += this.pointsForUpgrade(factionUpgrades, s.force);
-      points += this.pointsForUpgrade(factionUpgrades, s.turret);
-      points += this.pointsForUpgrade(factionUpgrades, s.title);
-      points += this.pointsForUpgrade(factionUpgrades, s.device1);
-      points += this.pointsForUpgrade(factionUpgrades, s.device2);
-      points += this.pointsForUpgrade(factionUpgrades, s.missile1);
-      points += this.pointsForUpgrade(factionUpgrades, s.missile2);
-      points += this.pointsForUpgrade(factionUpgrades, s.configuration);
-      points += this.pointsForUpgrade(factionUpgrades, s.illicit1);
-      points += this.pointsForUpgrade(factionUpgrades, s.illicit2);
-      points += this.pointsForUpgrade(factionUpgrades, s.tech);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.talent);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.sensor);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.cannon1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.cannon2);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.torpedo1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.modification1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.modification2);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.modification3);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.crew1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.crew2);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.crew3);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.gunner1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.astromech);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.force);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.turret);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.title);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.device1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.device2);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.missile1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.missile2);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.configuration);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.illicit1);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.illicit2);
+      points += this.pointsForUpgrade(s, factionUpgrades, s.tech);
     });
 
     this.showLink = false;
@@ -131,13 +131,24 @@ export class TabsComponent implements OnInit {
     else if (input.faction === 'Scum') this.rebelSquad = input.squad;
   }
 
-  private pointsForUpgrade(upgrades: Upgrade[], upgrade: string) {
-    console.log(upgrade);
-
+  private pointsForUpgrade(ship: Ship, upgrades: Upgrade[], upgrade: string) {
     if (!upgrade) return 0;
 
     upgrades = upgrades.filter(u => upgrade.split(",")[0].indexOf(u.name) > -1);
-    return upgrades.length > 0 ? upgrades[0].cost : 0;
+
+    if(upgrades.length === 0) return 0;
+
+    const splitCosts = upgrades[0].cost.split(',');
+
+    if (splitCosts.length === 1) return parseInt(splitCosts[0]);
+
+    let cost;
+    if (splitCosts.length === 3) {
+      console.log(ship);
+      cost = ship.size === 'Small' ? splitCosts[0] : ship.size === 'Medium' ? splitCosts[1] : splitCosts[2];
+    }
+
+    return parseInt(cost);
   }
 
   addShip(squad, ship): void {

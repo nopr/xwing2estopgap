@@ -16,12 +16,12 @@ export class DataService {
   getRebels(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Rebel', 'AA')).subscribe(val => {
+    this.http.get(this.basePath('Rebel', 'AB')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
 
-        let rebel = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6]);
+        let rebel = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[27]);
         rebel.talent = rebel.value(ship[7]);
         rebel.sensor = rebel.value(ship[8]);
         rebel.cannon1 = rebel.value(ship[9]);
@@ -83,12 +83,12 @@ export class DataService {
   getImperials(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Imperial', 'X')).subscribe(val => {
+    this.http.get(this.basePath('Imperial', 'Y')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
 
-        let imperial = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6]);
+        let imperial = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[24]);
         imperial.talent = imperial.value(ship[7]);
         imperial.sensor = imperial.value(ship[8]);
         imperial.torpedo1 = imperial.value(ship[9]);
@@ -150,12 +150,12 @@ export class DataService {
   getScum(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Scum', 'AC')).subscribe(val => {
+    this.http.get(this.basePath('Scum', 'AD')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
 
-        let scum = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6]);
+        let scum = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[29]);
         scum.talent = scum.value(ship[7]);
         scum.sensor = scum.value(ship[8]);
         scum.cannon1 = scum.value(ship[9]);

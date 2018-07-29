@@ -22,3 +22,7 @@
 .export-link {
   margin-top: 15px;
 }
+
+app-ship {
+  width: 100%;
+}

@@ -1,7 +1,7 @@
 export class Upgrade {
 
   name: string;
-  cost: number;
+  cost: string;
   unique: boolean;
   ability: string;
   type: string;
@@ -9,7 +9,7 @@ export class Upgrade {
 
   constructor(name: string, cost: string, unique: string, ability: string, type: string, restriction: string) {
     this.name = name;
-    this.cost = parseInt(cost);
+    this.cost = cost;
     this.unique = unique === 'TRUE';
     this.ability = ability;
     this.type = type;
