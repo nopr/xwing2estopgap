@@ -18,10 +18,10 @@
       </div>
       <div class="controls">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-6 col-sm-1">
             <div>Points: {{ squadPoints(rebelShips, rebelUpgrades, rebelSquad) }}</div>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-6 col-sm-11">
             <button id="hide-abilities" class="button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
             <button id="export-link" class="button" class="btn btn-primary">Export Link</button>
           </div>
@@ -64,10 +64,10 @@
       </div>
       <div class="controls">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-6 col-sm-1">
             <div>Points: {{ squadPoints(imperialShips, imperialUpgrades, imperialSquad) }}</div>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-6 col-sm-11">
             <button class="hide-abilities button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
             <button class="export-link button" class="btn btn-primary">Export Link</button>
           </div>
@@ -110,10 +110,10 @@
       </div>
       <div class="controls">
         <div class="row">
-          <div class="col-6">
+          <div class="col-lg-6 col-md-6 col-sm-1">
             <div>Points: {{ squadPoints(scumShips, scumUpgrades, scumSquad) }}</div>
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-md-6 col-sm-11">
             <button class="hide-abilities button" class="btn btn-primary" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
             <button class="export-link button" class="btn btn-primary">Export Link</button>
           </div>
