@@ -1,0 +1,21 @@
+<div class="squad__points">
+Points <span class="squad__points__total">{{ squadPoints(ships, upgrades, squad) }}</span>
+</div>
+<app-ship-search [ships]="ships" (selectedShip)="addShip($event)"></app-ship-search>
+<div class="squad__toolbar">
+  <button class="button" (click)="toggleShowAbilities()"><span *ngIf="showAbilities">Hide</span><span *ngIf="!showAbilities">Show</span> Abilities</button>
+  <button class="button"(click)="createExportLink(squad)">Export Link</button>
+</div>
+<div class="container">
+  <app-alert *ngIf="showLink">{{ squadLink }}</app-alert>
+</div>
+<app-ship *ngFor="let ship of squad; index as i"
+  [index]="i"
+  [points]="points"
+  [ship]="ship"
+  [ships]="ships"
+  [showAbilities]="showAbilities"
+  [squad]="squad"
+  [upgrades]="upgrades"
+  (updatePoints)="squadPoints(ships, upgrades, squad)">
+</app-ship>

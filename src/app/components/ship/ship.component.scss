@@ -1,0 +1,101 @@
+/*
+
+Ship
+
+*/
+
+/* ---------- Component */
+
+:host,
+.ship {
+  display: block;
+  max-width: 1280px;
+  margin: 24px auto;
+  padding: 0 12px;
+}
+
+/* ---------- Elements */
+
+.ship__header {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #CCCCCC;
+
+  > * {
+    flex: 1;
+  }
+
+  > *:last-child {
+    flex: none;
+  }
+}
+
+.ship__header__name {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+.ship__header__toolbar {
+
+  button + button {
+    margin-left: -1px;
+  }
+}
+
+.ship__body {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px 12px 0 12px;
+  border: 1px solid #CCCCCC;
+  margin-top: -1px;
+
+  > * {
+    width: 100%;
+  }
+
+  @media screen and (min-width: 768px) and (max-width: 1279px) {
+
+    > * {
+      width: 50%;
+      padding-right: 6px;
+
+      &:nth-child(even) {
+        padding-right: 0;
+        padding-left: 6px;
+      }
+    }
+
+  }
+
+  @media screen and (min-width: 1280px) {
+
+    > * {
+      width: 33.33%;
+      padding-right: 6px;
+
+      &:nth-child(3n+2) {
+        padding-right: 6px;
+        padding-left: 6px;
+      }
+
+      &:nth-child(3n+3) {
+        padding-right: 0;
+        padding-left: 6px;
+      }
+    }
+
+  }
+}
+
+.ship__body__upgrade__control,
+.ship__body__upgrade__details:not(:empty) {
+  margin-bottom: 12px;
+}
+
+.ship__footer {
+  padding: 12px;
+  border: 1px solid #CCCCCC;
+  margin-top: -1px;
+}

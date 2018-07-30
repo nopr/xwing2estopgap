@@ -23,16 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.css",
-              "node_modules/bootstrap/dist/css/bootstrap-grid.css",
-              "node_modules/bootstrap/dist/css/bootstrap-reboot.css",
-              "node_modules/font-awesome/css/font-awesome.css",
-              "src/styles.css"
-            ],
-            "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.bundle.js",
-              "node_modules/bootstrap/dist/js/bootstrap.js"
+              "src/styles.scss"
             ]
           },
           "configurations": {
@@ -126,5 +117,10 @@
       }
     }
   },
-  "defaultProject": "XWing2EStopGap"
+  "defaultProject": "XWing2EStopGap",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

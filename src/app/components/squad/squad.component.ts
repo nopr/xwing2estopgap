@@ -1,62 +1,33 @@
-import {Component, OnInit} from '@angular/core';
-import {Ship} from '../../model/ship';
-import {Upgrade} from '../../model/upgrade';
-import {DataService} from '../../services/data.service';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
+
+import { Ship } from '../../model/ship';
+import { Upgrade } from '../../model/upgrade';
+
+type Factions = 'rebels' | 'imperial' | 'scum';
 
 @Component({
-  selector: 'app-tabs',
-  templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.css']
+  selector: 'app-squad',
+  templateUrl: './squad.component.html',
+  styleUrls: ['./squad.component.scss']
 })
-export class TabsComponent implements OnInit {
+export class SquadComponent implements OnInit {
 
-  dataService: DataService;
+  @HostBinding('class.squad') attrClass: boolean = true;
 
-  searchValue: string;
-  showAbilities: boolean;
-  showLink: boolean;
+  @Input() faction: Factions;
+  @Input() ships: Ship[];
+  @Input() upgrades: Upgrade[];
 
-  rebelShips: Ship[];
-  imperialShips: Ship[];
-  scumShips: Ship[];
-  genericUpgrades: Upgrade[];
-  rebelUpgrades: Upgrade[];
-  imperialUpgrades: Upgrade[];
-  scumUpgrades: Upgrade[];
+  showAbilities: boolean = true;
+  showLink: boolean = false;
+  squadLink: string;
 
-  rebelSquad: Ship[];
-  imperialSquad: Ship[];
-  scumSquad: Ship[];
+  squad: Ship[] = [];
+  points: number;
 
-  rebelPoints: number;
-  imperialPoints: number;
-  scumPoints: number;
-
-  rebelSquadLink: string;
-  imperialSquadLink: string;
-  scumSquadLink: string;
-
-  constructor(dataService: DataService) {
-    this.dataService = dataService;
-    this.rebelSquad = [];
-    this.imperialSquad = [];
-    this.scumSquad = [];
-
-    this.showLink = false;
-  }
+  constructor() { }
 
   ngOnInit() {
-
-    this.showAbilities = true;
-
-    this.rebelShips = this.dataService.getRebels();
-    this.imperialShips = this.dataService.getImperials();
-    this.scumShips = this.dataService.getScum();
-
-    this.genericUpgrades = this.dataService.getUpgrades();
-    this.rebelUpgrades = this.dataService.getRebelUpgrades();
-    this.imperialUpgrades = this.dataService.getImperialUpgrades();
-    this.scumUpgrades = this.dataService.getScumUpgrades();
 
     const queryParams = new URLSearchParams(window.location.search);
 
@@ -106,29 +77,19 @@ export class TabsComponent implements OnInit {
     return points;
   }
 
-  createExportLink(faction: string, squad: Ship[]) : void {
+  createExportLink(squad: Ship[]) : void {
+    const faction = this.faction.charAt(0).toUpperCase() + this.faction.slice(1); // Uppercase first character
     let output = { faction: faction, squad: squad };
     let value = btoa(JSON.stringify(output));
     let link = `${window.location}?squad=${value}`;
 
-    switch (faction) {
-      case 'Rebels':
-        this.rebelSquadLink = link;
-      case 'Imperial':
-        this.imperialSquadLink = link;
-      case 'Scum':
-        this.scumSquadLink = link;
-    }
-
+    this.squadLink = link;
     this.showLink = true;
   }
 
   importSquad(data: string): void {
     let input = JSON.parse(atob(data));
-
-    if (input.faction === 'Rebels') this.rebelSquad = input.squad;
-    else if (input.faction === 'Imperial') this.rebelSquad = input.squad;
-    else if (input.faction === 'Scum') this.rebelSquad = input.squad;
+    this.squad = input.squad;
   }
 
   private pointsForUpgrade(ship: Ship, upgrades: Upgrade[], upgrade: string) {
@@ -154,13 +115,12 @@ export class TabsComponent implements OnInit {
     return parseInt(cost);
   }
 
-  addShip(squad, ship): void {
-    squad.push({...ship});
-    this.searchValue = '';
+  addShip(ship): void {
+    this.squad.push({...ship});
   }
 
   removeShip(squad, index): void {
-    squad.splice(index, 1);
+    this.squad.splice(index, 1);
   }
 
   getUpgradeByName(upgrades: Upgrade[], upgrade: string): string {

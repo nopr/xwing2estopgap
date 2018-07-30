@@ -1,0 +1,40 @@
+/*
+
+Squad
+
+TODO: Squad Toolbar Component + Squad Points
+
+*/
+
+.squad__toolbar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px;
+  display: flex;
+
+  .button {
+    flex: 1;
+
+    + .button {
+      margin-left: -1px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    justify-content: flex-end;  
+
+    .button {
+      flex: none;
+    }
+  }
+}
+
+.squad__points {
+  max-width: 1280px;
+  margin: 24px auto;
+  padding: 0 12px;
+}
+
+.squad__points__total {
+  font-weight: bold;
+}

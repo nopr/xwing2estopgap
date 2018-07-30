@@ -1,13 +1,16 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import {Ship} from '../../model/ship';
-import {Upgrade} from '../../model/upgrade';
+import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+
+import { Ship } from '../../model/ship';
+import { Upgrade } from '../../model/upgrade';
 
 @Component({
   selector: 'app-ship',
   templateUrl: './ship.component.html',
-  styleUrls: ['./ship.component.css']
+  styleUrls: ['./ship.component.scss']
 })
-export class ShipComponent implements OnInit {
+export class ShipComponent {
+
+  @HostBinding('class.ship') attrClass: boolean = true;
 
   @Input() ships: Ship[];
   @Input() upgrades: Upgrade[];
@@ -20,9 +23,6 @@ export class ShipComponent implements OnInit {
   @Output() updatePoints = new EventEmitter<number>();
 
   constructor() {}
-
-  ngOnInit() {
-  }
 
   duplicateShip(squad, index): void {
     const ship = squad[index];
