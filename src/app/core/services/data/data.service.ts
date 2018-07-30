@@ -86,7 +86,7 @@ export class DataService {
   getImperials(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Imperial', 'Z')).subscribe(val => {
+    this.http.get(this.basePath('Imperial', 'AA')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
@@ -116,6 +116,7 @@ export class DataService {
         imperial.illicit1 = undefined;
         imperial.illicit2 = undefined;
         imperial.tech = undefined;
+        imperial.torpedo2 = imperial.value(ship[26]);
 
         ships.push(imperial);
       }

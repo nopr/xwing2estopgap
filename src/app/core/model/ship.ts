@@ -12,6 +12,7 @@ export class Ship {
   cannon1: string;
   cannon2: string;
   torpedo1: string;
+  torpedo2: string;
   modification1: string;
   modification2: string;
   modification3: string;
