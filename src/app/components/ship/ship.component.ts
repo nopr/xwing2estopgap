@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { Ship } from '../../model/ship';
 import { Upgrade } from '../../model/upgrade';
@@ -11,6 +12,8 @@ import { Upgrade } from '../../model/upgrade';
 export class ShipComponent {
 
   @HostBinding('class.ship') attrClass: boolean = true;
+
+  ngForm: NgForm;
 
   @Input() ships: Ship[];
   @Input() upgrades: Upgrade[];
@@ -79,5 +82,12 @@ export class ShipComponent {
     this.updateSquadPoints();
 
     return ship[upgrade];
+  }
+
+  changeUpgrade(model: any) {
+    // Reset if blank
+    if (model.value === '') {
+      model.control.reset('');
+    }
   }
 }
