@@ -75,14 +75,18 @@ export class SquadComponent implements OnInit {
     return points;
   }
 
-  createExportLink(squad: Ship[]) : void {
+  createExportLink(): void {
     const faction = this.faction.charAt(0).toUpperCase() + this.faction.slice(1); // Uppercase first character
-    let output = { faction: faction, squad: squad };
+    let output = { faction: faction, squad: this.squad };
     let value = btoa(JSON.stringify(output));
     let link = `${window.location}?squad=${value}`;
 
     this.squadLink = link;
     this.showLink = true;
+  }
+
+  viewSquad(): void {
+    // placeholder
   }
 
   importSquad(data: string): void {
@@ -115,21 +119,5 @@ export class SquadComponent implements OnInit {
 
   addShip(ship): void {
     this.squad.unshift({...ship});
-  }
-
-  removeShip(squad, index): void {
-    this.squad.splice(index, 1);
-  }
-
-  getUpgradeByName(upgrades: Upgrade[], upgrade: string): string {
-    upgrades = upgrades.filter(u => u.name == upgrade);
-
-    return upgrades.length > 0 ? upgrades[0].ability : '';
-  }
-
-  getUpgrade(upgrades: Upgrade[], upgrade: string): Upgrade {
-    upgrades = upgrades.filter(u => u.name === upgrade);
-
-    return upgrades.length > 0 ? upgrades[0] : undefined;
   }
 }

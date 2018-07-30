@@ -31,16 +31,54 @@ Ship
   }
 }
 
-.ship__header__name {
+.ship__header__collapse {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+}
+
+.ship__header__collapse__icon {
+  width: 48px;
+  height: 48px;
+  display: block;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzlweCIgaGVpZ2h0PSIyNnB4IiB2aWV3Qm94PSIwIDAgMzkgMjYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ0LjEgKDQxNDU1KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5Hcm91cDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUuMDAwMDAwLCAtMTEuMDAwMDAwKSI+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHg9IjAiIHk9IjAiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCI+PC9yZWN0PgogICAgICAgICAgICA8cGF0aCBkPSJNMzYuOTMxNzA3MSwxMSBMNDMuNjIxMTM4MSwxNy42ODk0MzEgTDI0LjMxMDU2OSwzNyBMNSwxNy42ODk0MzEgTDExLjY4OTQzMSwxMSBMMjQuMzEwNTY5LDIzLjYyMTEzODEgTDM2LjkzMTcwNzEsMTEgWiIgaWQ9IkNvbWJpbmVkLVNoYXBlIiBmaWxsPSIjMUQxRDFEIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=);
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-position: right 16px top 16px;
+  transform: rotate(180deg);
+
+  .is-collapsed & {
+    transform: rotate(0deg);
+  }
+}
+
+.ship__header__name__ship {
   font-size: 18px;
   line-height: 24px;
   font-weight: bold;
 }
 
-.ship__header__toolbar {
+.ship__header__name__pilot {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+.ship__header__name__cost {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: normal;
+}
+
+.ship__toolbar {
+  padding: 12px;
+  border: 1px solid #CCCCCC;
+  margin-top: -1px;
+  display: flex;
+  justify-content: flex-end;
 
   button + button {
-    margin-left: -1px;
+    margin-left: 6px;
   }
 }
 
@@ -89,7 +127,10 @@ Ship
   }
 }
 
-.ship__body__upgrade__control,
+.ship__body__upgrade__control {
+  margin-bottom: 12px;
+}
+
 .ship__body__upgrade__details:not(:empty) {
   margin-bottom: 12px;
 }
@@ -98,4 +139,10 @@ Ship
   padding: 12px;
   border: 1px solid #CCCCCC;
   margin-top: -1px;
+}
+
+/* ---------- Helpers */
+
+.is-hidden {
+  display: none;
 }
