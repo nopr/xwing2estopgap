@@ -6,17 +6,14 @@ TODO: Squad Toolbar Component + Squad Points
 
 */
 
-.squad__toolbar {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 12px;
+.squad__meta__controls {
   display: flex;
 
   .button {
     flex: 1;
 
     + .button {
-      margin-left: -1px;
+      margin-left: 6px;
     }
   }
 
@@ -31,12 +28,34 @@ TODO: Squad Toolbar Component + Squad Points
 
 .squad__meta {
   max-width: 1280px;
-  margin: 12px auto;
+  margin: 24px auto;
   padding: 0 12px;
+
+  @media screen and (min-width: 768px) {
+    display: flex;
+
+    > * {
+      flex: 1;
+
+      &:last-child {
+        flex: none;
+      }
+    }
+
+    .squad__meta__details,
+    .squad__meta__controls {
+      margin: 0;
+    }
+  }
+}
+
+.squad__meta__details,
+.squad__meta__controls {
+  margin: 24px auto;
 }
 
 .squad__meta__points {
-  margin: 12px auto;
+  margin-top: 2px;
 }
 
 .squad__meta__points__total {
