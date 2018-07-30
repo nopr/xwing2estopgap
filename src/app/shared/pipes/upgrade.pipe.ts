@@ -1,5 +1,6 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {Upgrade} from '../model/upgrade';
+import { Pipe, PipeTransform } from '@angular/core';
+
+import { Upgrade } from '@app/core/model/upgrade';
 
 @Pipe({name: 'forUpgrade', pure: false})
 export class ForUpgrade implements PipeTransform {

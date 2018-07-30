@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Ship} from '../model/ship';
-import {Upgrade} from '../model/upgrade';
-import {HttpClient} from '@angular/common/http';
-import {Spreadsheet} from '../model/spreadsheet';
+import { HttpClient } from '@angular/common/http';
+
+import { CoreModule } from '../../core.module';
+
+import { Ship } from '@app/core/model/ship';
+import { Upgrade } from '@app/core/model/upgrade';
+import { Spreadsheet } from '@app/core/model/spreadsheet';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: CoreModule
 })
 export class DataService {
 

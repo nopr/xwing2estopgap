@@ -1,7 +1,7 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
-import { Ship } from '../../model/ship';
-import { Upgrade } from '../../model/upgrade';
+import { Ship } from '@app/core/model/ship';
+import { Upgrade } from '@app/core/model/upgrade';
 
 type Factions = 'rebels' | 'imperial' | 'scum';
 
@@ -27,14 +27,12 @@ export class SquadComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
     const queryParams = new URLSearchParams(window.location.search);
 
     if (queryParams.has('squad')) {
       this.importSquad(queryParams.get('squad'));
     }
-
   }
 
   toggleShowAbilities(): void {

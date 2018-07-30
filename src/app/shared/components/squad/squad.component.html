@@ -1,5 +1,8 @@
-<div class="squad__points">
-Points <span class="squad__points__total">{{ squadPoints(ships, upgrades, squad) }}</span>
+<div class="squad__meta">
+  <div class="squad__meta__faction">{{ faction }} squadron</div>
+  <div class="squad__meta__points">
+    Points <span class="squad__meta__points__total">{{ squadPoints(ships, upgrades, squad) }}</span>
+  </div>
 </div>
 <app-ship-search [ships]="ships" (selectedShip)="addShip($event)"></app-ship-search>
 <div class="squad__toolbar">

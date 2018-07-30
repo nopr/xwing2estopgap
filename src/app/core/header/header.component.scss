@@ -13,7 +13,6 @@ $header-height:                 60px;
 :host,
 .header {
   display: block;
-  border-bottom: 1px solid #CCCCCC;
 }
 
 /* ---------- Elements */
@@ -25,4 +24,8 @@ $header-height:                 60px;
   font-weight: bold;
   line-height: 1;
   padding: ($header-height - 22px) / 2  12px;
+}
+
+.header__strap {
+  font-weight: normal;
 }

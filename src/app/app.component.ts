@@ -6,11 +6,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  title: string = 'X-Wing 2E Stop Gap';
-  activeIndex: number = 1;
-
-  setActive(index: number) {
-    this.activeIndex = index;
-  }
+  title: string = 'X-Wing 2E';
+  strap: string = 'Stop Gapp'
 
 }

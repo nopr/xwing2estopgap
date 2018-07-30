@@ -21,7 +21,7 @@ TODO: Squad Toolbar Component + Squad Points
   }
 
   @media screen and (min-width: 768px) {
-    justify-content: flex-end;  
+    justify-content: flex-end;
 
     .button {
       flex: none;
@@ -29,12 +29,22 @@ TODO: Squad Toolbar Component + Squad Points
   }
 }
 
-.squad__points {
+.squad__meta {
   max-width: 1280px;
-  margin: 24px auto;
+  margin: 12px auto;
   padding: 0 12px;
 }
 
-.squad__points__total {
+.squad__meta__points {
+  margin: 12px auto;
+}
+
+.squad__meta__points__total {
   font-weight: bold;
+}
+
+.squad__meta__faction {
+  text-transform: capitalize;
+  font-weight: bold;
+  font-size: 18px;
 }
