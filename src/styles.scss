@@ -69,6 +69,7 @@ button {
   font-weight: bold;
   height: 48px;
   border: 1px solid #CCCCCC;
+  background-color: white;
   line-height: 48px;
   padding: 0 12px;
 
@@ -135,5 +136,9 @@ select {
   &,
   &:hover {
     transition: border 0.15s;
+  }
+
+  &.ng-pristine {
+    color: #AAAAAA;
   }
 }

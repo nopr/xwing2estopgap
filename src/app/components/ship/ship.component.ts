@@ -1,4 +1,5 @@
-import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormControl, NgForm } from '@angular/forms';
 
 import { Ship } from '../../model/ship';
 import { Upgrade } from '../../model/upgrade';
@@ -8,9 +9,11 @@ import { Upgrade } from '../../model/upgrade';
   templateUrl: './ship.component.html',
   styleUrls: ['./ship.component.scss']
 })
-export class ShipComponent {
+export class ShipComponent implements OnInit {
 
   @HostBinding('class.ship') attrClass: boolean = true;
+
+  @ViewChild('f') form: NgForm;
 
   @Input() ships: Ship[];
   @Input() upgrades: Upgrade[];
@@ -26,7 +29,7 @@ export class ShipComponent {
 
   duplicateShip(squad, index): void {
     const ship = squad[index];
-    squad.push({...ship});
+    squad.unshift({...ship});
   }
 
   removeShip(squad, index): void {
@@ -79,5 +82,27 @@ export class ShipComponent {
     this.updateSquadPoints();
 
     return ship[upgrade];
+  }
+
+  changeUpgrade(model: any) {
+    // Reset if blank
+    if (model.value === '') {
+      model.control.reset('');
+    }
+  }
+
+  updateUpgradeStatus(): void {
+    setTimeout(() => {
+      for (const field in this.form.form.controls) {
+        const control = this.form.form.get(field);
+        if (control.value !== '') {
+          control.markAsDirty();
+        }
+      }
+    });
+  }
+
+  ngOnInit(): void {
+    this.updateUpgradeStatus();
   }
 }
