@@ -117,7 +117,7 @@ export class SquadComponent implements OnInit {
     return parseInt(cost);
   }
 
-  addShip(ship): void {
-    this.squad.unshift({...ship});
+  addShip(ship: Ship): void {
+    this.squad.unshift(Object.assign({}, ship));
   }
 }
