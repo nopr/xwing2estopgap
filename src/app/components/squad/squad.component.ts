@@ -116,7 +116,7 @@ export class SquadComponent implements OnInit {
   }
 
   addShip(ship): void {
-    this.squad.push({...ship});
+    this.squad.unshift({...ship});
   }
 
   removeShip(squad, index): void {
