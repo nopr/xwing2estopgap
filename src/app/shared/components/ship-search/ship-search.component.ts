@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostBinding, Input, Output } from '@angular/core';
 
-import { Ship } from '../../model/ship';
+import { Ship } from '@app/core/model/ship';
 
 @Component({
   selector: 'app-ship-search',

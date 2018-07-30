@@ -1,5 +1,3 @@
-<app-header [title]="title"></app-header>
-<app-navigation (activeIndex)="setActive($event)"></app-navigation>
-<app-rebels [hidden]="activeIndex !== 1"></app-rebels>
-<app-imperials [hidden]="activeIndex !== 2"></app-imperials>
-<app-scum [hidden]="activeIndex !== 3"></app-scum>
+<app-header [title]="title" [strap]="strap"></app-header>
+<app-navigation></app-navigation>
+<router-outlet></router-outlet>

@@ -1,0 +1,52 @@
+/*
+
+Buttons
+
+*/
+
+/* ---------- Component */
+
+button {
+  position: relative;
+
+  &:focus {
+    z-index: 10;
+  }
+}
+
+.button {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  height: 48px;
+  border: 1px solid #CCCCCC;
+  background-color: white;
+  line-height: 48px;
+  padding: 0 12px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &.is-active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &,
+  &:hover,
+  &.is-active {
+    transition: background 0.15s;
+  }
+}
+
+/* ---------- Modifiers */
+
+.button--danger {
+  background-color: #FF5050;
+  border-color: #AA3232;
+  color: white;
+
+  &:hover {
+    background-color: #AA3232;
+  }
+}

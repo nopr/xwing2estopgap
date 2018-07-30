@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
-import { Ship } from '../../model/ship';
-import { Upgrade } from '../../model/upgrade';
-import { DataService } from '../../services/data.service';
+import { Ship } from '@app/core/model/ship';
+import { Upgrade } from '@app/core/model/upgrade';
+import { DataService } from '@app/core/services/data/data.service';
 
 @Component({
   selector: 'app-scum',

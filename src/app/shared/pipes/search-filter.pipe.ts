@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {Ship} from '../model/ship';
+
+import { Ship } from '@app/core/model/ship';
 
 @Pipe({ name: 'searchFilter' })
 export class SearchFilterPipe implements PipeTransform {

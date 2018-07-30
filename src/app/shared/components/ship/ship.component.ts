@@ -1,8 +1,8 @@
 import { Component, EventEmitter, HostBinding, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, NgForm } from '@angular/forms';
 
-import { Ship } from '../../model/ship';
-import { Upgrade } from '../../model/upgrade';
+import { Ship } from '@app/core/model/ship';
+import { Upgrade } from '@app/core/model/upgrade';
 
 @Component({
   selector: 'app-ship',
