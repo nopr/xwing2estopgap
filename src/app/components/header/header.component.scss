@@ -1,0 +1,28 @@
+/*
+
+Header
+
+*/
+
+/* ---------- Variables */
+
+$header-height:                 60px;
+
+/* ---------- Component */
+
+:host,
+.header {
+  display: block;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+/* ---------- Elements */
+
+.header__title {
+  max-width: 1280px;
+  margin: 0 auto;
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1;
+  padding: ($header-height - 22px) / 2  12px;
+}

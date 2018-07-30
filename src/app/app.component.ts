@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-  title = 'X-Wing 2nd Edition Stop Gap';
 
-  constructor() {
+  title: string = 'X-Wing 2E Stop Gap';
+  activeIndex: number = 1;
+
+  setActive(index: number) {
+    this.activeIndex = index;
   }
+
 }

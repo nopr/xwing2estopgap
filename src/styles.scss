@@ -1,0 +1,139 @@
+/* ---------- Reset */
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, input, textarea, button,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ---------- Lists */
+
+ol, ul, li {
+  list-style: none;
+}
+
+/* ---------- HTML */
+
+html {
+  font-family: sans-serif;
+  color: #1D1D1D;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+[hidden] {
+  display: none;
+}
+
+/* ---------- Buttons */
+
+button {
+  position: relative;
+
+  &:focus {
+    z-index: 10;
+  }
+}
+
+.button {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  height: 48px;
+  border: 1px solid #CCCCCC;
+  line-height: 48px;
+  padding: 0 12px;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &,
+  &:hover {
+    transition: background 0.15s;
+  }
+}
+
+.button--danger {
+  background-color: #FF5050;
+  border-color: #AA3232;
+  color: white;
+
+  &:hover {
+    background-color: #AA3232;
+  }
+}
+
+/* ---------- Inputs */
+
+input[type="text"] {
+  height: 48px;
+  line-height: 48px;
+  padding: 0 12px;
+  width: 100%;
+  border: 1px solid #CCCCCC;
+  font-size: 16px;
+
+  &:hover {
+    border-color: #AAAAAA;
+  }
+
+  &,
+  &:hover {
+    transition: border 0.15s;
+  }
+}
+
+select {
+  width: 100%;
+  height: 48px;
+  line-height: 48px;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 0 48px 0 12px;
+  appearance: none;
+  border-radius: 0;
+  border: 1px solid #CCCCCC;
+  background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMzlweCIgaGVpZ2h0PSIyNnB4IiB2aWV3Qm94PSIwIDAgMzkgMjYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ0LjEgKDQxNDU1KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5Hcm91cDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJQYWdlLTEiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUuMDAwMDAwLCAtMTEuMDAwMDAwKSI+CiAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUiIHg9IjAiIHk9IjAiIHdpZHRoPSI0OCIgaGVpZ2h0PSI0OCI+PC9yZWN0PgogICAgICAgICAgICA8cGF0aCBkPSJNMzYuOTMxNzA3MSwxMSBMNDMuNjIxMTM4MSwxNy42ODk0MzEgTDI0LjMxMDU2OSwzNyBMNSwxNy42ODk0MzEgTDExLjY4OTQzMSwxMSBMMjQuMzEwNTY5LDIzLjYyMTEzODEgTDM2LjkzMTcwNzEsMTEgWiIgaWQ9IkNvbWJpbmVkLVNoYXBlIiBmaWxsPSIjMUQxRDFEIj48L3BhdGg+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=);
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  background-position: right 16px top 16px;
+
+  &:hover {
+    border-color: #AAAAAA;
+  }
+
+  &,
+  &:hover {
+    transition: border 0.15s;
+  }
+}

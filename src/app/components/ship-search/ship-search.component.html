@@ -1,0 +1,11 @@
+<input type="text" class="ship-search__control" placeholder="Search for ship or pilot..." [(ngModel)]="searchValue">
+<div class="ship-search__results">
+  <li class="ship-search__result" *ngFor="let ship of ships | searchFilter: searchValue" (click)="selectShip(ship)">
+    <div class="ship-search__result__detail">
+      <div class="ship-search__result__name">{{ ship.name }} - {{ ship.pilot }}</div>
+      <div class="ship-search__result__ability ship-search__result__ability--pilot" *ngIf="ship.pilotAbility">{{ ship.pilotAbility }}</div>
+      <div class="ship-search__result__ability ship-search__result__ability--ship" *ngIf="ship.shipAbility">{{ ship.shipAbility }}</div>
+    </div>
+    <div class="ship-search__result__cost">{{ ship.cost }}</div>
+  </li>
+</div>

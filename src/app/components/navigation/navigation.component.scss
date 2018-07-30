@@ -1,0 +1,66 @@
+/*
+
+Navigation
+
+*/
+
+/* ---------- Component */
+
+:host,
+.navigation {
+  display: block;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+/* ---------- Elements */
+
+.navigation__controls {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 12px;
+  display: flex;
+
+  > * {
+    flex: 1;
+  }
+}
+
+.navigation__control {
+  height: 48px;
+  line-height: 48px;
+  padding: 0 12px;
+  border-left: 1px solid #CCCCCC;
+  border-right: 1px solid #CCCCCC;
+
+  & + & {
+    margin-left: -1px;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &.is-active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &,
+  &:hover {
+    transition: background 0.15s;
+  }
+}
+
+.navigation__control__long-name {
+  display: none;
+
+  @media screen and (min-width: 768px) {
+    display: inline;
+  }
+}
+
+.navigation__control__short-name {
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+}
