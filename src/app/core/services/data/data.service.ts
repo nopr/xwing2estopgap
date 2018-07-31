@@ -91,7 +91,7 @@ export class DataService {
       for (let row in data) {
         let ship = data[row];
 
-        let imperial = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[24], ship[25], ship[27], ship[28], ship[31], ship[32], ship[33]);
+        let imperial = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[24], ship[25], ship[27], ship[28], ship[30], ship[31], ship[32]);
         imperial.talent = imperial.value(ship[7]);
         imperial.sensor = imperial.value(ship[8]);
         imperial.torpedo1 = imperial.value(ship[9]);
