@@ -12,6 +12,7 @@ import { Upgrade } from '@app/core/model/upgrade';
 export class ShipComponent implements OnInit {
 
   isCollapsed: boolean = false;
+  actions: string[];
 
   @HostBinding('class.ship') attrClass: boolean = true;
 
@@ -111,5 +112,8 @@ export class ShipComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateUpgradeStatus();
+
+    // Temp
+    this.actions = this.ship.actions ? this.ship.actions.split(',') : null;
   }
 }
