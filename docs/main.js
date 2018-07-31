@@ -1156,6 +1156,14 @@ var ShipComponent = /** @class */ (function () {
             if (value.indexOf('>') >= 0) {
                 var linkedAction = _this.createPrettyAction(action.name.split('>')[1]);
                 action.name = action.name.split('>')[0];
+                /*
+        
+                  Match names to icon names
+        
+                */
+                if (action.name === 'lock') {
+                    action.name = 'targetlock';
+                }
                 action.linkedAction = linkedAction;
             }
             values.push(action);
