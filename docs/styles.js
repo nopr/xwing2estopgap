@@ -539,7 +539,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\code\XWing2EStopGap\src\styles.scss */"./src/styles.scss");
+module.exports = __webpack_require__(/*! C:\Code\XWing2EStopGap\src\styles.scss */"./src/styles.scss");
 
 
 /***/ })
