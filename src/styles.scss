@@ -57,5 +57,11 @@ html {
   display: none;
 }
 
+/* ---------- Icons */
+
+@import 'assets/fonts/xwing-miniatures';
+
+/* ---------- Global Components */
+
 @import 'app/shared/components/buttons/buttons.component';
 @import 'app/shared/components/forms/forms.component';

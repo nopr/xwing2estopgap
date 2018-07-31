@@ -147,34 +147,41 @@ Ship
 
 .ship__stats__stat {
   padding-right: 12px;
-}
 
-.ship__stats__stat__value {
-  font-weight: bold;
-  display: block;
-
-  @media screen and (min-width: 768px) {
-    display: inline;
+  i {
+    padding-right: 4px;
   }
 }
 
 .ship__actions {
-
-  @media screen and (min-width: 768px) {
-    display: flex;
-  }
+  display: flex;
 }
 
 .ship__actions__action {
-  padding-right: 12px;
+  padding-right: 18px;
 
-  @media screen and (min-width: 768px) {
-    
-    &:not(:last-child) {
-      margin-right: 12px;
-      border-right: 1px solid #CCCCCC;
-    }
+  i.is-red-difficulty {
+    color: #FF5050;
   }
+}
+
+.ship__actions__linked-action {
+  position: relative;
+  padding-left: 12px;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 4px solid transparent;
+    border-bottom: 4px solid transparent;
+    border-left: 5px solid #1D1D1D;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
+    }
 }
 
 /* ---------- Helpers */
