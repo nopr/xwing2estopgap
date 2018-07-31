@@ -196,6 +196,16 @@ export class ShipComponent implements OnInit {
         let linkedAction = this.createPrettyAction(action.name.split('>')[1]);
         action.name = action.name.split('>')[0];
 
+        /*
+
+          Match names to icon names
+
+        */
+
+        if (action.name === 'lock') {
+          action.name = 'targetlock';
+        }
+
         action.linkedAction = linkedAction;
       }
 
