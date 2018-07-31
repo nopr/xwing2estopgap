@@ -19,12 +19,12 @@ export class DataService {
   getRebels(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Rebel', 'AG')).subscribe(val => {
+    this.http.get(this.basePath('Rebel', 'AH')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
 
-        let rebel = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[27], ship[30],ship[28],ship[29],ship[31],ship[32]);
+        let rebel = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[27], ship[30],ship[28],ship[29],ship[31],ship[32],ship[33]);
         rebel.talent = rebel.value(ship[7]);
         rebel.sensor = rebel.value(ship[8]);
         rebel.cannon1 = rebel.value(ship[9]);
