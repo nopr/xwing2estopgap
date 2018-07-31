@@ -12,6 +12,8 @@ import { Upgrade } from '@app/core/model/upgrade';
 export class ShipComponent implements OnInit {
 
   isCollapsed: boolean = false;
+  actions: string[];
+  attackValues: any[];
 
   @HostBinding('class.ship') attrClass: boolean = true;
 
@@ -108,7 +110,104 @@ export class ShipComponent implements OnInit {
     this.isCollapsed = !this.isCollapsed;
   }
 
+  createPrettyAttackValues(attackValues: string): any[] {
+    const values: any[] = [];
+    attackValues.split(',').forEach((value: string) => {
+
+      let attack = {
+        name: 'frontarc',
+        value: '0'
+      }
+
+      // Front Arc
+      if (value.length === 0) {
+        attack.value = value;
+
+      // Not Front Arc
+      } else {
+        attack.value = value.split('')[0];
+        const attackFacing = value.split('')[value.length - 1];
+
+        /*
+
+          Match names to icon names
+
+        */
+
+        // Half Front
+        if (attackFacing === 'h') {
+          attack.name = 'fullfrontarc';
+        // Single Turret
+        } else if (attackFacing === 's') {
+          attack.name = 'singleturretarc';
+        // Double Turret
+        } else if (attackFacing === 'd') {
+          attack.name = 'doubleturretarc';
+        // Rear Arc
+        } else if (attackFacing === 'r') {
+          attack.name = 'reararc';
+        }
+      }
+
+      values.push(attack);
+    });
+
+    return values;
+  }
+
+  createPrettyAction(name: string): any {
+
+    let action: any = {
+      name: 'focus',
+      difficulty: 'white'
+    }
+
+    action.name = name.replace(new RegExp(/[\[\]]/, 'g'), '').replace(new RegExp(/\s/, 'g'), '').toLowerCase();
+
+    // Check Difficulty (Can't be red action into another red action so don't have to check for that later)
+    if (RegExp(/^red/).test(action.name)) {
+      action.difficulty = 'red';
+      action.name = action.name.replace(new RegExp(/^red/, 'g'), '');
+    }
+
+    /*
+
+      Match names to icon names
+
+    */
+
+    if (action.name === 'lock') {
+      action.name = 'targetlock';
+    }
+
+    return action;
+  }
+
+  createPrettyActions(actionValues: string): any[] {
+    const values: any[] = [];
+
+    actionValues.split(',').forEach((value: string) => {
+
+      let action = this.createPrettyAction(value);
+
+      // Linked Actions
+      if (value.indexOf('>') >= 0) {
+
+        let linkedAction = this.createPrettyAction(action.name.split('>')[1]);
+        action.name = action.name.split('>')[0];
+
+        action.linkedAction = linkedAction;
+      }
+
+      values.push(action);
+    });
+
+    return values;
+  }
+
   ngOnInit(): void {
     this.updateUpgradeStatus();
+    this.attackValues = this.createPrettyAttackValues(this.ship.attack);
+    this.actions = this.createPrettyActions(this.ship.actions);
   }
 }

@@ -1,11 +1,37 @@
 <div class="ship__header">
   <div class="ship__header__name">
     <div class="ship__header__name__ship">{{ ship.name }}</div>
-    <div class="ship__header__name__pilot">{{ ship.pilot }} <span class="ship__header__name__cost">({{ ship.cost }})</span></div>
+    <div class="ship__header__name__pilot">{{ ship.initiative}} - {{ ship.pilot }} <span class="ship__header__name__cost">({{ ship.cost }})</span></div>
   </div>
   <button class="button ship__header__collapse" [class.is-collapsed]="isCollapsed" (click)="toggleCollapsed()" title="Toggle">
     <span class="ship__header__collapse__icon"></span>
   </button>
+</div>
+<div class="ship__footer" *ngIf="showAbilities" [class.is-hidden]="isCollapsed">
+  <div class="ship__stats">
+    <div class="ship__stats__stat" *ngFor="let attack of attackValues">
+        <i class="xwing-miniatures-font xwing-miniatures-font-{{ attack.name }}"></i>{{ attack.value }}
+    </div>
+    <div class="ship__stats__stat">
+      <i class="xwing-miniatures-font xwing-miniatures-font-agility"></i>{{ ship.agility }}
+    </div>
+    <div class="ship__stats__stat">
+      <i class="xwing-miniatures-font xwing-miniatures-font-hull"></i>{{ ship.hull }}
+    </div>
+    <div class="ship__stats__stat">
+      <i class="xwing-miniatures-font xwing-miniatures-font-shield"></i>{{ ship.shields }}
+    </div>
+  </div>
+</div>
+<div class="ship__footer" *ngIf="actions && showAbilities" [class.is-hidden]="isCollapsed">
+  <div class="ship__actions">
+    <div class="ship__actions__action" *ngFor="let action of actions">
+      <i class="xwing-miniatures-font xwing-miniatures-font-{{ action.name }}" [class.is-red-difficulty]="action.difficulty === 'red'"></i>
+      <span class="ship__actions__linked-action" *ngIf="action.linkedAction?.name">
+        <i class="xwing-miniatures-font xwing-miniatures-font-{{ action.linkedAction.name }}" [class.is-red-difficulty]="action.linkedAction.difficulty === 'red'"></i>
+      </span>
+    </div>
+  </div>
 </div>
 <form class="ship__body" #f="ngForm" [class.is-hidden]="isCollapsed">
   <!-- Talent -->
