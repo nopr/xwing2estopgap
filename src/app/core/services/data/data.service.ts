@@ -96,12 +96,12 @@ export class DataService {
         imperial.sensor = imperial.value(ship[8]);
         imperial.torpedo1 = imperial.value(ship[9]);
         imperial.missile1 = imperial.value(ship[10]);
-        imperial.missile2 = imperial.value(ship[11]);
+        imperial.missile2 = imperial.setValue('missile2Restriction', ship[11]);
         imperial.modification1 = imperial.value(ship[12]);
         imperial.modification2 = imperial.value(ship[13]);
         imperial.modification3 = undefined;
         imperial.configuration = imperial.value(ship[14]);
-        imperial.cannon1 = imperial.value(ship[15]);
+        imperial.cannon1 = imperial.setValue('cannon1Restriction', ship[15]);
         imperial.cannon2 = undefined;
         imperial.crew1 = imperial.value(ship[16]);
         imperial.crew2 = imperial.value(ship[17]);
@@ -165,7 +165,7 @@ export class DataService {
         scum.cannon1 = scum.value(ship[9]);
         scum.cannon2 = scum.value(ship[10]);
         scum.device1 = scum.value(ship[11]);
-        scum.device2 = scum.value(ship[12]);
+        scum.device2 = scum.setValue('device2Restriction', ship[12]);
         scum.illicit1 = scum.value(ship[13]);
         scum.illicit2 = scum.value(ship[14]);
         scum.modification1 = scum.value(ship[15]);
@@ -173,9 +173,9 @@ export class DataService {
         scum.modification3 = scum.value(ship[17]);
         scum.title = scum.value(ship[18]);
         scum.turret = scum.value(ship[19]);
-        scum.torpedo1 = scum.value(ship[20]);
+        scum.torpedo1 = scum.setValue('torpedo1Restriction',ship[20]);
         scum.gunner1 = scum.setValue('gunner1Restriction', ship[21]);
-        scum.astromech = scum.value(ship[22]);
+        scum.astromech = scum.setValue('astromechRestriction', ship[22]);
         scum.missile1 = scum.value(ship[23]);
         scum.missile2 = undefined;
         scum.crew1 = scum.value(ship[24]);

@@ -67,6 +67,8 @@ export class ShipComponent implements OnInit {
   }
 
   getUpgradeByName(upgrade: string): string {
+    if (!upgrade) return '';
+
     const upgrades = this.upgrades.filter(u => upgrade.split(',')[0].indexOf(u.name) > -1);
 
     return upgrades.length > 0 ? upgrades[0].ability : '';
@@ -74,9 +76,9 @@ export class ShipComponent implements OnInit {
 
   checkUpgrade(upgrade: string): boolean {
     const shipUpgrade = this.ship[`${upgrade}Restriction`];
-    if (!shipUpgrade && this.ship[upgrade] === undefined) {
-      return false;
-    }
+
+    if (!shipUpgrade && this.ship[upgrade] === undefined) return false;
+    if (!shipUpgrade && this.ship[upgrade] === '') return true;
 
     const upgradeRequirement = shipUpgrade.split(":")[0];
     const requirementName = shipUpgrade.split(":")[1];
@@ -88,7 +90,8 @@ export class ShipComponent implements OnInit {
     return requirementSet;
   }
 
-  changeUpgrade(model: any) {    
+  changeUpgrade(model: any) {
+    this.updateSquadPoints();
     // Reset if blank
     if (model.value === '') {
       model.control.reset('');
@@ -219,5 +222,10 @@ export class ShipComponent implements OnInit {
     this.updateUpgradeStatus();
     this.attackValues = this.createPrettyAttackValues(this.ship.attack);
     this.actions = this.createPrettyActions(this.ship.actions);
+
+    // Todo: Dan I'm sorry, this looks hacky, but it works :D
+    this.form.valueChanges.subscribe(val => {
+      this.ship.torpedo1 = val['torpedo1'];
+    })
   }
 }
