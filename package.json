@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "pages-build": "ng build --base-href /xwing2estopgap/ && cp ./docs/index.html ./docs/404.html"
   },
   "private": true,
   "dependencies": {
