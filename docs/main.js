@@ -528,7 +528,7 @@ var DataService = /** @class */ (function () {
     };
     DataService.prototype.getImperials = function () {
         var ships = [];
-        this.http.get(this.basePath('Imperial', 'Z')).subscribe(function (val) {
+        this.http.get(this.basePath('Imperial', 'AA')).subscribe(function (val) {
             var data = val.values;
             for (var row in data) {
                 var ship = data[row];
@@ -557,6 +557,7 @@ var DataService = /** @class */ (function () {
                 imperial.illicit1 = undefined;
                 imperial.illicit2 = undefined;
                 imperial.tech = undefined;
+                imperial.torpedo2 = imperial.value(ship[26]);
                 ships.push(imperial);
             }
         });
@@ -1032,7 +1033,7 @@ var ShipComponent = /** @class */ (function () {
         return ship[upgrade];
     };
     ShipComponent.prototype.duplicateShip = function () {
-        var ship = this.squad[this.index];
+        var ship = Object.assign({}, this.ship);
         this.squad.unshift(ship);
     };
     ShipComponent.prototype.removeShip = function () {
@@ -1093,10 +1094,6 @@ var ShipComponent = /** @class */ (function () {
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Array)
-    ], ShipComponent.prototype, "ships", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Array)
     ], ShipComponent.prototype, "upgrades", void 0);
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
@@ -1144,7 +1141,7 @@ var ShipComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<app-ship-search [ships]=\"ships\" (selectedShip)=\"addShip($event)\"></app-ship-search>\n<div class=\"squad__meta\">\n  <div class=\"squad__meta__details\">\n    <div class=\"squad__meta__faction\">{{ faction }} squadron</div>\n    <div class=\"squad__meta__points\">\n      Points <span class=\"squad__meta__points__total\">{{ squadPoints(ships, upgrades, squad) }}</span>\n    </div>\n  </div>\n  <div class=\"squad__meta__controls\">\n    <button class=\"button\" (click)=\"toggleShowAbilities()\"><span *ngIf=\"showAbilities\">Hide</span><span *ngIf=\"!showAbilities\">Show</span> Abilities</button>\n    <button class=\"button\"(click)=\"createExportLink()\">Export</button>\n    <!-- <button class=\"button\"(click)=\"viewSquad()\">View</button> -->\n  </div>\n</div>\n<div class=\"container\">\n  <app-alert *ngIf=\"showLink\">{{ squadLink }}</app-alert>\n</div>\n<app-ship *ngFor=\"let ship of squad; index as i\"\n  [index]=\"i\"\n  [points]=\"points\"\n  [ship]=\"ship\"\n  [ships]=\"ships\"\n  [showAbilities]=\"showAbilities\"\n  [squad]=\"squad\"\n  [upgrades]=\"upgrades\"\n  (updatePoints)=\"squadPoints(ships, upgrades, squad)\">\n</app-ship>\n"
+module.exports = "<app-ship-search [ships]=\"ships\" (selectedShip)=\"addShip($event)\"></app-ship-search>\n<div class=\"squad__meta\">\n  <div class=\"squad__meta__details\">\n    <div class=\"squad__meta__faction\">{{ faction }} squadron</div>\n    <div class=\"squad__meta__points\">\n      Points <span class=\"squad__meta__points__total\">{{ squadPoints(ships, upgrades, squad) }}</span>\n    </div>\n  </div>\n  <div class=\"squad__meta__controls\">\n    <button class=\"button\" (click)=\"toggleShowAbilities()\"><span *ngIf=\"showAbilities\">Hide</span><span *ngIf=\"!showAbilities\">Show</span> Abilities</button>\n    <button class=\"button\"(click)=\"createExportLink()\">Export</button>\n    <!-- <button class=\"button\"(click)=\"viewSquad()\">View</button> -->\n  </div>\n</div>\n<div class=\"container\">\n  <app-alert *ngIf=\"showLink\">{{ squadLink }}</app-alert>\n</div>\n<app-ship *ngFor=\"let ship of squad; index as i\"\n  [index]=\"i\"\n  [points]=\"points\"\n  [ship]=\"ship\"\n  [showAbilities]=\"showAbilities\"\n  [squad]=\"squad\"\n  [upgrades]=\"upgrades\"\n  (updatePoints)=\"squadPoints(ships, upgrades, squad)\">\n</app-ship>\n"
 
 /***/ }),
 
@@ -1170,14 +1167,6 @@ module.exports = "/*\n\nSquad\n\nTODO: Squad Toolbar Component + Squad Points\n\
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SquadComponent", function() { return SquadComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var __assign = (undefined && undefined.__assign) || Object.assign || function(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-        s = arguments[i];
-        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-            t[p] = s[p];
-    }
-    return t;
-};
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1271,7 +1260,7 @@ var SquadComponent = /** @class */ (function () {
         return parseInt(cost);
     };
     SquadComponent.prototype.addShip = function (ship) {
-        this.squad.unshift(__assign({}, ship));
+        this.squad.unshift(Object.assign({}, ship));
     };
     __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostBinding"])('class.squad'),

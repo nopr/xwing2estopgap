@@ -17,7 +17,6 @@ export class ShipComponent implements OnInit {
 
   @ViewChild('f') form: NgForm;
 
-  @Input() ships: Ship[];
   @Input() upgrades: Upgrade[];
   @Input() showAbilities: boolean;
   @Input() squad: Ship[];
@@ -53,7 +52,7 @@ export class ShipComponent implements OnInit {
   }
 
   duplicateShip(): void {
-    const ship: Ship = this.squad[this.index];
+    const ship: Ship = Object.assign({}, this.ship);
     this.squad.unshift(ship);
   }
 
