@@ -7,6 +7,31 @@
     <span class="ship__header__collapse__icon"></span>
   </button>
 </div>
+<div class="ship__footer" *ngIf="showAbilities">
+  <div class="ship__stats">
+    <div class="ship__stats__stat">
+      Initiative <span class="ship__stats__stat__value">{{ ship.initiative }}</span>
+    </div>
+    <div class="ship__stats__stat">
+      Attack <span class="ship__stats__stat__value">{{ ship.attack }}</span>
+    </div>
+    <div class="ship__stats__stat">
+      Agility <span class="ship__stats__stat__value">{{ ship.agility }}</span>
+    </div>
+    <div class="ship__stats__stat">
+      Hull <span class="ship__stats__stat__value">{{ ship.hull }}</span>
+    </div>
+    <div class="ship__stats__stat">
+      Shields <span class="ship__stats__stat__value">{{ ship.shields }}</span>
+    </div>
+  </div>
+</div>
+<div class="ship__footer" *ngIf="actions && showAbilities">
+  <div class="ship__actions">
+    <div class="ship__actions__action"><strong>Actions</strong></div>
+    <div class="ship__actions__action" *ngFor="let action of actions">{{ action }}</div>
+  </div>
+</div>
 <form class="ship__body" #f="ngForm" [class.is-hidden]="isCollapsed">
   <!-- Talent -->
   <div class="ship__body__upgrade" *ngIf="ship.talent !== undefined">
