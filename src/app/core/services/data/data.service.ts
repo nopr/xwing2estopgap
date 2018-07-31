@@ -86,12 +86,12 @@ export class DataService {
   getImperials(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Imperial', 'AF')).subscribe(val => {
+    this.http.get(this.basePath('Imperial', 'AG')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
 
-        let imperial = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[24], ship[25], ship[27], ship[28], ship[31], ship[32], '');
+        let imperial = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[24], ship[25], ship[27], ship[28], ship[31], ship[32], ship[33]);
         imperial.talent = imperial.value(ship[7]);
         imperial.sensor = imperial.value(ship[8]);
         imperial.torpedo1 = imperial.value(ship[9]);
@@ -154,12 +154,12 @@ export class DataService {
   getScum(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Scum', 'AI')).subscribe(val => {
+    this.http.get(this.basePath('Scum', 'AJ')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
 
-        let scum = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[29], ship[32],ship[30],ship[31],ship[33],ship[34], '');
+        let scum = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[29], ship[32],ship[30],ship[31],ship[33],ship[34],ship[35]);
         scum.talent = scum.value(ship[7]);
         scum.sensor = scum.value(ship[8]);
         scum.cannon1 = scum.value(ship[9]);
