@@ -174,7 +174,7 @@ export class DataService {
         scum.title = scum.value(ship[18]);
         scum.turret = scum.value(ship[19]);
         scum.torpedo1 = scum.value(ship[20]);
-        scum.gunner1 = scum.value(ship[21]);
+        scum.gunner1 = scum.setValue('gunner1Restriction', ship[21]);
         scum.astromech = scum.value(ship[22]);
         scum.missile1 = scum.value(ship[23]);
         scum.missile2 = undefined;

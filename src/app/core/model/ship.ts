@@ -20,6 +20,7 @@ export class Ship {
   crew2: string;
   crew3: string;
   gunner1: string;
+  gunner1Restriction: string;
   astromech: string;
   force: string;
   turret: string;
@@ -61,6 +62,14 @@ export class Ship {
     if (!value) return undefined;
 
     return value === 'TRUE' ? '' : value === '' ? undefined : `,${value}`;
+  }
+
+  public setValue(restriction: string, value: string): string {
+    if (value === undefined || value === 'TRUE' || value === '') return value;    
+
+    this[restriction] = value;
+
+    return undefined;
   }
 }
 
