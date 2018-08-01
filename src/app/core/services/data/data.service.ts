@@ -49,7 +49,7 @@ export class DataService {
         rebel.illicit1 = rebel.value(ship[26]);
         rebel.illicit2 = undefined;
         rebel.tech = undefined;
-        rebel.forcePoints = parseInt(rebel.value(ship[34]))
+        rebel.forcePoints = parseInt(ship[34])
 
         ships.push(rebel);
       }
@@ -118,7 +118,7 @@ export class DataService {
         imperial.illicit2 = undefined;
         imperial.tech = undefined;
         imperial.torpedo2 = imperial.value(ship[26]);
-        imperial.forcePoints = parseInt(imperial.value(ship[33]));
+        imperial.forcePoints = parseInt(ship[33]);
 
         ships.push(imperial);
       }
@@ -186,7 +186,7 @@ export class DataService {
         scum.force = scum.value(ship[27]);
         scum.tech = scum.value(ship[27]);
         scum.configuration = undefined;
-        scum.forcePoints = parseInt(scum.value(ship[36]));
+        scum.forcePoints = parseInt(ship[36]);
 
         ships.push(scum);
       }
