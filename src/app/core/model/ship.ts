@@ -39,6 +39,8 @@ export class Ship {
   hull: number;
   shields: number;
   actions: string;
+  forcePoints: number;
+  totalCost: number;
 
   constructor(name: string, cost: string, pilot: string, unique: string, faction: string, shipAbility: string, pilotAbility: string, size: string, agility: string, initiative: string, attack: string, hull: string, shields: string, actions: string) {
     this.name = name;
@@ -55,6 +57,7 @@ export class Ship {
     this.hull = parseInt(hull);
     this.shields = parseInt(shields);
     this.actions = actions;
+    this.totalCost = this.cost;
   }
 
   value(value: string): string {

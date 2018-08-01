@@ -1,7 +1,7 @@
 <div class="ship__header">
   <div class="ship__header__name">
     <div class="ship__header__name__ship">{{ ship.name }}</div>
-    <div class="ship__header__name__pilot">{{ ship.initiative}} - {{ ship.pilot }} <span class="ship__header__name__cost">({{ ship.cost }})</span></div>
+    <div class="ship__header__name__pilot">{{ ship.initiative}} - {{ ship.pilot }} <span class="ship__header__name__cost">({{ ship.totalCost }})</span></div>
   </div>
   <button class="button ship__header__collapse" [class.is-collapsed]="isCollapsed" (click)="toggleCollapsed()" title="Toggle">
     <span class="ship__header__collapse__icon"></span>
@@ -21,8 +21,8 @@
     <div class="ship__stats__stat">
       <i class="xwing-miniatures-font xwing-miniatures-font-shield"></i>{{ ship.shields }}
     </div>    
-    <div class="ship__stats__stat" *ngIf="ship.force > 0">
-      <i class="xwing-miniatures-font xwing-miniatures-font-forcecharge"></i><i class="xwing-miniatures-font xwing-miniatures-font-recurring"></i>{{ ship.force }}
+    <div class="ship__stats__stat" *ngIf="ship.forcePoints > 0">
+      <i class="xwing-miniatures-font xwing-miniatures-font-forcecharge"></i><i class="xwing-miniatures-font xwing-miniatures-font-recurring"></i>{{ ship.forcePoints }}
     </div>
   </div>
 </div>

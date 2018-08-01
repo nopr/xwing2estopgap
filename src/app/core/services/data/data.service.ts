@@ -19,7 +19,7 @@ export class DataService {
   getRebels(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Rebel', 'AH')).subscribe(val => {
+    this.http.get(this.basePath('Rebel', 'AI')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
@@ -49,6 +49,7 @@ export class DataService {
         rebel.illicit1 = rebel.value(ship[26]);
         rebel.illicit2 = undefined;
         rebel.tech = undefined;
+        rebel.forcePoints = parseInt(rebel.value(ship[34]))
 
         ships.push(rebel);
       }
@@ -86,7 +87,7 @@ export class DataService {
   getImperials(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Imperial', 'AG')).subscribe(val => {
+    this.http.get(this.basePath('Imperial', 'AH')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
@@ -117,6 +118,7 @@ export class DataService {
         imperial.illicit2 = undefined;
         imperial.tech = undefined;
         imperial.torpedo2 = imperial.value(ship[26]);
+        imperial.forcePoints = parseInt(imperial.value(ship[33]));
 
         ships.push(imperial);
       }
@@ -154,7 +156,7 @@ export class DataService {
   getScum(): Ship[] {
     let ships = [];
 
-    this.http.get(this.basePath('Scum', 'AJ')).subscribe(val => {
+    this.http.get(this.basePath('Scum', 'AK')).subscribe(val => {
       let data = (val as Spreadsheet).values;
       for (let row in data) {
         let ship = data[row];
@@ -184,6 +186,7 @@ export class DataService {
         scum.force = scum.value(ship[27]);
         scum.tech = scum.value(ship[27]);
         scum.configuration = undefined;
+        scum.forcePoints = parseInt(scum.value(ship[36]));
 
         ships.push(scum);
       }
