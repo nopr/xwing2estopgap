@@ -192,10 +192,10 @@ export class ShipComponent implements OnInit {
       let action = this.createPrettyAction(value);
 
       // Linked Actions
-      if (value.indexOf('>') >= 0) {
+      if (value.indexOf('-') >= 0) {
 
-        let linkedAction = this.createPrettyAction(action.name.split('>')[1]);
-        action.name = action.name.split('>')[0];
+        let linkedAction = this.createPrettyAction(action.name.split('-')[1]);
+        action.name = action.name.split('-')[0]
 
         /*
 

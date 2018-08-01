@@ -1156,9 +1156,9 @@ var ShipComponent = /** @class */ (function () {
         actionValues.split(',').forEach(function (value) {
             var action = _this.createPrettyAction(value);
             // Linked Actions
-            if (value.indexOf('>') >= 0) {
-                var linkedAction = _this.createPrettyAction(action.name.split('>')[1]);
-                action.name = action.name.split('>')[0];
+            if (value.indexOf('-') >= 0) {
+                var linkedAction = _this.createPrettyAction(action.name.split('-')[1]);
+                action.name = action.name.split('-')[0];
                 /*
         
                   Match names to icon names
