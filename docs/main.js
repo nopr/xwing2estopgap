@@ -907,7 +907,7 @@ var AlertComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<input type=\"text\" class=\"ship-search__control\" placeholder=\"Search for ship or pilot...\" [(ngModel)]=\"searchValue\">\r\n<div class=\"ship-search__results\">\r\n  <li class=\"ship-search__result\" *ngFor=\"let ship of ships | searchFilter: searchValue\" (click)=\"selectShip(ship)\">\r\n    <div class=\"ship-search__result__detail\">\r\n      <div class=\"ship-search__result__name\">{{ ship.name }} - {{ ship.pilot }}</div>\r\n      <div class=\"ship-search__result__ability ship-search__result__ability--pilot\" *ngIf=\"ship.pilotAbility\">{{ ship.pilotAbility }}</div>\r\n      <div class=\"ship-search__result__ability ship-search__result__ability--ship\" *ngIf=\"ship.shipAbility\">{{ ship.shipAbility }}</div>\r\n    </div>\r\n    <div class=\"ship-search__result__cost\">{{ ship.cost }}</div>\r\n  </li>\r\n</div>\r\n"
+module.exports = "<div class=\"ship-search__controls\">\r\n  <input type=\"text\" class=\"ship-search__control\" placeholder=\"Search for ship or pilot...\" [(ngModel)]=\"searchValue\">\r\n  <button class=\"button ship-search__show-all\" (click)=\"showAll = !showAll\">{{showAll ? 'Hide' : 'Show'}} All Ships</button>\r\n</div>\r\n<div class=\"ship-search__results\">\r\n  <li class=\"ship-search__result\" *ngFor=\"let ship of ships | searchFilter: searchValue:showAll\" (click)=\"selectShip(ship)\">\r\n    <div class=\"ship-search__result__detail\">\r\n      <div class=\"ship-search__result__name\">{{ ship.name }} - {{ ship.pilot }}</div>\r\n      <div class=\"ship-search__result__ability ship-search__result__ability--pilot\" *ngIf=\"ship.pilotAbility\">{{ ship.pilotAbility }}</div>\r\n      <div class=\"ship-search__result__ability ship-search__result__ability--ship\" *ngIf=\"ship.shipAbility\">{{ ship.shipAbility }}</div>\r\n    </div>\r\n    <div class=\"ship-search__result__cost\">{{ ship.cost }}</div>\r\n  </li>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -918,7 +918,7 @@ module.exports = "<input type=\"text\" class=\"ship-search__control\" placeholde
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/*\r\n\r\nShip Search\r\n\r\n*/\n/* ---------- Component */\n:host,\n.ship-search {\n  max-width: 1280px;\n  margin: 24px auto;\n  display: block;\n  padding: 0 12px; }\n/* ---------- Elements */\n.ship-search__results {\n  max-height: 480px;\n  overflow-y: auto; }\n.ship-search__results:not(:empty) {\n    border: 1px solid #CCCCCC;\n    margin-top: -1px; }\n.ship-search__result {\n  display: flex;\n  cursor: pointer; }\n.ship-search__result > * {\n    flex: 1;\n    padding: 12px; }\n.ship-search__result > *:last-child {\n    flex: none; }\n.ship-search__result:not(:last-child) {\n    border-bottom: 1px solid #CCCCCC; }\n.ship-search__result:hover {\n    background-color: rgba(0, 0, 0, 0.1); }\n.ship-search__result, .ship-search__result:hover {\n    transition: background 0.15s; }\n.ship-search__result__name {\n  font-size: 18px;\n  line-height: 24px;\n  font-weight: bold; }\n.ship-search__result__ability {\n  font-size: 16px;\n  line-height: 20px; }\n.ship-search__result__ability--ship {\n  opacity: 0.5; }\n"
+module.exports = "/*\r\n\r\nShip Search\r\n\r\n*/\n/* ---------- Component */\n:host,\n.ship-search {\n  max-width: 1280px;\n  margin: 24px auto;\n  display: block;\n  padding: 0 12px; }\n/* ---------- Elements */\n.ship-search__control {\n  min-width: 200px;\n  max-width: 1115px; }\n.ship-search__show-all {\n  min-width: 135px;\n  margin: 12px auto; }\n.ship-search__results {\n  max-height: 480px;\n  overflow-y: auto; }\n.ship-search__results:not(:empty) {\n    border: 1px solid #CCCCCC;\n    margin-top: -1px; }\n.ship-search__result {\n  display: flex;\n  cursor: pointer; }\n.ship-search__result > * {\n    flex: 1;\n    padding: 12px; }\n.ship-search__result > *:last-child {\n    flex: none; }\n.ship-search__result:not(:last-child) {\n    border-bottom: 1px solid #CCCCCC; }\n.ship-search__result:hover {\n    background-color: rgba(0, 0, 0, 0.1); }\n.ship-search__result, .ship-search__result:hover {\n    transition: background 0.15s; }\n.ship-search__result__name {\n  font-size: 18px;\n  line-height: 24px;\n  font-weight: bold; }\n.ship-search__result__ability {\n  font-size: 16px;\n  line-height: 20px; }\n.ship-search__result__ability--ship {\n  opacity: 0.5; }\n"
 
 /***/ }),
 
@@ -950,6 +950,7 @@ var ShipSearchComponent = /** @class */ (function () {
     }
     ShipSearchComponent.prototype.selectShip = function (ship) {
         this.searchValue = null;
+        this.showAll = false;
         this.selectedShip.emit(ship);
     };
     __decorate([
@@ -1422,7 +1423,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var SearchFilterPipe = /** @class */ (function () {
     function SearchFilterPipe() {
     }
-    SearchFilterPipe.prototype.transform = function (ships, search) {
+    SearchFilterPipe.prototype.transform = function (ships, search, showAll) {
+        if (showAll && (!search || search === ''))
+            return ships;
         if (!search || search === '')
             return [];
         search = search.toLowerCase();

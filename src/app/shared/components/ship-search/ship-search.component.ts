@@ -16,9 +16,11 @@ export class ShipSearchComponent {
   @Output() selectedShip: EventEmitter<Ship> = new EventEmitter<Ship>();
 
   searchValue: string;
+  showAll: boolean;
 
   selectShip(ship): void {
     this.searchValue = null;
+    this.showAll = false;
     this.selectedShip.emit(ship);
   }
 
