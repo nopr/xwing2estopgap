@@ -145,8 +145,8 @@
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.crew3) }}</div>
   </div>
   <!-- Gunner 1 -->
-  <div class="ship__body__upgrade" *ngIf="checkUpgrade('gunner1')">
-    <select class="ship__body__upgrade__control" [(ngModel)]="ship.gunner1" #gunner1="ngModel" name="gunner1" (change)="changeUpgrade(gunner1)">
+  <div class="ship__body__upgrade" >
+    <select class="ship__body__upgrade__control" [disabled]="!checkUpgrade('gunner1')" [(ngModel)]="ship.gunner1" #gunner1="ngModel" name="gunner1" (change)="changeUpgrade(gunner1)">
       <option value="" disabled selected hidden>Gunner</option>
       <option value="">None</option>
       <option *ngFor="let upgrade of upgrades | forUpgrade: 'Gunner'" [ngValue]="upgrade.name">

@@ -69,7 +69,7 @@ export class ShipComponent implements OnInit {
   getUpgradeByName(upgrade: string): string {
     if (!upgrade) return '';
 
-    const upgrades = this.upgrades.filter(u => upgrade.split(',')[0].indexOf(u.name) > -1);
+    const upgrades = this.upgrades.filter(u => upgrade === u.name);
 
     return upgrades.length > 0 ? upgrades[0].ability : '';
   }
