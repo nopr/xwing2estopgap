@@ -24,4 +24,9 @@ export class ShipSearchComponent {
     this.selectedShip.emit(ship);
   }
 
+  toggleShowAll(): void {
+    this.showAll = !this.showAll;
+    this.searchValue = null;
+  }
+
 }

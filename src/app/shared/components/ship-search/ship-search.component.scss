@@ -16,14 +16,12 @@ Ship Search
 
 /* ---------- Elements */
 
-.ship-search__control {
-  min-width: 200px;
-  max-width: 1115px;
-}
+.ship-search__input-group {
+  display: flex;
 
-.ship-search__show-all {
-  min-width: 135px;
-  margin: 12px auto;
+  > .ship-search__action {
+    border-left: none;
+  }
 }
 
 .ship-search__results {

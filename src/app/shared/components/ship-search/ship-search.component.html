@@ -1,6 +1,6 @@
-<div class="ship-search__controls">
+<div class="ship-search__input-group">
   <input type="text" class="ship-search__control" placeholder="Search for ship or pilot..." [(ngModel)]="searchValue">
-  <button class="button ship-search__show-all" (click)="showAll = !showAll">{{showAll ? 'Hide' : 'Show'}} All Ships</button>
+  <button class="button ship-search__action" (click)="toggleShowAll()">{{ showAll ? 'Hide' : 'Show' }} All</button>
 </div>
 <div class="ship-search__results">
   <li class="ship-search__result" *ngFor="let ship of ships | searchFilter: searchValue:showAll" (click)="selectShip(ship)">
