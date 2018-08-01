@@ -42,7 +42,7 @@ export class SquadComponent implements OnInit {
   squadPoints(faction: Ship[], factionUpgrades: Upgrade[], squad: Ship[]) {
     let points = 0;
 
-    squad.forEach((s: any) => {
+    squad.forEach(s => {
       points += s.cost;
       points += this.pointsForUpgrade(s, factionUpgrades, s.talent);
       points += this.pointsForUpgrade(s, factionUpgrades, s.sensor);

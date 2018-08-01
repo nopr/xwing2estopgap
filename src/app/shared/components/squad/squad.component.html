@@ -17,8 +17,10 @@
 </div>
 <app-ship *ngFor="let ship of squad; index as i"
   [index]="i"
+  [points]="points"
   [ship]="ship"
   [showAbilities]="showAbilities"
   [squad]="squad"
-  [upgrades]="upgrades">
+  [upgrades]="upgrades"
+  (updatePoints)="squadPoints(ships, upgrades, squad)">
 </app-ship>
