@@ -5,7 +5,8 @@ import { Ship } from '@app/core/model/ship';
 @Pipe({ name: 'searchFilter' })
 export class SearchFilterPipe implements PipeTransform {
 
-  transform(ships: Ship[], search: string): any {
+  transform(ships: Ship[], search: string, showAll: boolean): any {
+    if (showAll && (!search || search === '')) return ships;
     if (!search || search === '') return [];
 
     search = search.toLowerCase();
