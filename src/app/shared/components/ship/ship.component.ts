@@ -67,29 +67,32 @@ export class ShipComponent implements OnInit {
   }
 
   getUpgradeByName(upgrade: string): string {
-    const upgrades = this.upgrades.filter(u => upgrade == u.name);
+    if (!upgrade) return '';
+
+    const upgrades = this.upgrades.filter(u => upgrade === u.name);
 
     return upgrades.length > 0 ? upgrades[0].ability : '';
   }
 
   checkUpgrade(upgrade: string): boolean {
-    const shipUpgrade = this.ship[upgrade];
+    const shipUpgrade = this.ship[`${upgrade}Restriction`];
+    if (!shipUpgrade && this.ship[upgrade] === undefined) return false;    
     if (!shipUpgrade) return false;
 
-    const splitUpgrade = shipUpgrade.split(",");
-    if (splitUpgrade.length != 2) return false;
+    let upgradeRequirement = shipUpgrade.split(":")[0];
+    const requirementName = shipUpgrade.split(":")[1];
 
-    const upgradeRequirement = splitUpgrade[1].split(":")[0];
-    const requirementName = splitUpgrade[1].split(":")[1];
+    const isRemove = upgradeRequirement.startsWith('!');
+    upgradeRequirement = upgradeRequirement.replace('!','');
+    const requirementSet = !isRemove && this.ship[upgradeRequirement] === requirementName || isRemove && this.ship[upgradeRequirement] !== requirementName;
 
-    const requirementSet = this.ship[upgradeRequirement] === requirementName;
-
-    if (!requirementSet) this.ship[upgrade] = `,${splitUpgrade[1]}`;
+    if (!requirementSet) this.ship[upgrade] = '';
+    if (requirementSet && !this.ship[upgrade]) this.ship[upgrade] = ''
 
     return requirementSet;
   }
 
-  changeUpgrade(model: any) {
+  changeUpgrade(model: any) {    
     // Reset if blank
     if (model.value === '') {
       model.control.reset('');
@@ -220,5 +223,10 @@ export class ShipComponent implements OnInit {
     this.updateUpgradeStatus();
     this.attackValues = this.createPrettyAttackValues(this.ship.attack);
     this.actions = this.createPrettyActions(this.ship.actions);
+
+    // Todo: Dan I'm sorry, this looks hacky, but it works :D
+    this.form.valueChanges.subscribe(val => {
+      this.ship.torpedo1 = val['torpedo1'];
+    })
   }
 }
