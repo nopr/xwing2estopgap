@@ -9,25 +9,34 @@ export class Ship {
   pilotAbility: string;
   talent: string;
   sensor: string;
+  sensorRestriction: string;
   cannon1: string;
+  cannon1Restriction: string;
   cannon2: string;
   torpedo1: string;
+  torpedo1Restriction: string;
   torpedo2: string;
   modification1: string;
   modification2: string;
+  modification2Restriction: string;
   modification3: string;
   crew1: string;
+  crew1Restriction: string;
   crew2: string;
   crew3: string;
   gunner1: string;
+  gunner1Restriction: string;
   astromech: string;
+  astromechRestriction: string;
   force: string;
   turret: string;
   title: string;
   device1: string;
   device2: string;
+  device2Restriction: string;
   missile1: string;
   missile2: string;
+  missile2Restriction: string;
   configuration: string;
   illicit1: string;
   illicit2: string;
@@ -64,5 +73,14 @@ export class Ship {
     if (!value) return undefined;
 
     return value === 'TRUE' ? '' : value === '' ? undefined : undefined;
+  }
+
+  public setValue(restriction: string, value: string): string {
+    if (value === 'TRUE') return '';
+    if (value === undefined || value === '') return undefined;
+
+    this[restriction] = value;
+
+    return undefined;
   }
 }
