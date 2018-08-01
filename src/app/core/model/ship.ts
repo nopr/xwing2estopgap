@@ -63,7 +63,7 @@ export class Ship {
   value(value: string): string {
     if (!value) return undefined;
 
-    return value === 'TRUE' ? '' : value === '' ? undefined : `${value}`;
+    return value === 'TRUE' ? '' : value === '' ? undefined : undefined;
   }
 }
 
