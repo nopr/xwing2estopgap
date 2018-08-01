@@ -105,7 +105,7 @@
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.modification1) }}</div>
   </div>
   <!-- Modifaction 2 -->
-  <div class="ship__body__upgrade" *ngIf="ship.modification2 !== undefined">
+  <div class="ship__body__upgrade" *ngIf="checkUpgrade('modification2')">
     <select class="ship__body__upgrade__control" [(ngModel)]="ship.modification2" #modification2="ngModel" name="modification2" (change)="changeUpgrade(modification2)">
       <option value="" disabled selected hidden>Modification</option>
       <option value="">None</option>

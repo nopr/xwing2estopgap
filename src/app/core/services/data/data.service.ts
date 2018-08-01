@@ -169,7 +169,7 @@ export class DataService {
         scum.illicit1 = scum.value(ship[13]);
         scum.illicit2 = scum.value(ship[14]);
         scum.modification1 = scum.value(ship[15]);
-        scum.modification2 = scum.value(ship[16]);
+        scum.modification2 = scum.setValue('modification2Restriction', ship[16]);
         scum.modification3 = scum.value(ship[17]);
         scum.title = scum.value(ship[18]);
         scum.turret = scum.value(ship[19]);
