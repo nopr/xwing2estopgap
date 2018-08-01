@@ -14,6 +14,7 @@ export class ShipComponent implements OnInit {
   isCollapsed: boolean = false;
   actions: string[];
   attackValues: any[];
+  cost: number;
 
   @HostBinding('class.ship') attrClass: boolean = true;
 
@@ -24,9 +25,6 @@ export class ShipComponent implements OnInit {
   @Input() squad: Ship[];
   @Input() ship: Ship;
   @Input() index: number;
-  @Input() points: number;
-
-  @Output() updatePoints = new EventEmitter<number>();
 
   constructor() {}
 
@@ -48,7 +46,7 @@ export class ShipComponent implements OnInit {
 
     this.ship[upgrade] = `${newValue},${splitUpgrade[1]}`;
 
-    this.updateSquadPoints();
+    // this.updateSquadPoints();
 
     return ship[upgrade];
   }
@@ -60,10 +58,6 @@ export class ShipComponent implements OnInit {
 
   removeShip(): void {
     this.squad.splice(this.index, 1);
-  }
-
-  updateSquadPoints() {
-    this.updatePoints.next();
   }
 
   getUpgradeByName(upgrade: string): string {
@@ -219,8 +213,25 @@ export class ShipComponent implements OnInit {
     return values;
   }
 
+  updateCost(): void {
+    let cost: number = 0;
+
+    this.form.valueChanges.subscribe((value) => {
+      cost = this.ship.cost;
+
+      Object.keys(value).forEach((upgrade) => {
+        if (this.form.controls[upgrade].value.cost) {
+          cost = cost + parseInt(this.form.controls[upgrade].value.cost);
+        }
+      });
+      
+      this.cost = cost;
+    });
+  }
+
   ngOnInit(): void {
     this.updateUpgradeStatus();
+    this.updateCost();
     this.attackValues = this.createPrettyAttackValues(this.ship.attack);
     this.actions = this.createPrettyActions(this.ship.actions);
 

@@ -84,4 +84,3 @@ export class Ship {
     return undefined;
   }
 }
-
