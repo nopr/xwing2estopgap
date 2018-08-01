@@ -183,7 +183,6 @@ export class DataService {
         scum.crew3 = scum.value(ship[26]);
         scum.force = scum.value(ship[27]);
         scum.tech = scum.value(ship[27]);
-        scum.force = undefined;
         scum.configuration = undefined;
 
         ships.push(scum);
