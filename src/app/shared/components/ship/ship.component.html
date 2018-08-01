@@ -34,6 +34,16 @@
   </div>
 </div>
 <form class="ship__body" #f="ngForm" [class.is-hidden]="isCollapsed">
+  <!-- Title -->
+  <div class="ship__body__upgrade" *ngIf="ship.title !== undefined">
+    <select class="ship__body__upgrade__control" [(ngModel)]="ship.title" #title="ngModel" name="title" (change)="changeUpgrade(title)">
+      <option value="" disabled selected hidden>Title</option>
+      <option value="">None</option>
+      <option *ngFor="let upgrade of upgrades | forUpgrade: 'Title'" [ngValue]="upgrade.name">
+        <span *ngIf="upgrade.unique">*</span>{{ upgrade.name }} ({{ upgrade.cost }})</option>
+    </select>
+    <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.title) }}</div>
+  </div>
   <!-- Talent -->
   <div class="ship__body__upgrade" *ngIf="ship.talent !== undefined">
     <select class="ship__body__upgrade__control" [(ngModel)]="ship.talent" #talent="ngModel" name="talent" (change)="changeUpgrade(talent)">
@@ -115,7 +125,7 @@
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.modification3) }}</div>
   </div>
   <!-- Crew 1 -->
-  <div class="ship__body__upgrade" *ngIf="ship.crew1 !== undefined">
+  <div class="ship__body__upgrade" *ngIf="checkUpgrade('crew1')">
     <select class="ship__body__upgrade__control" [(ngModel)]="ship.crew1" #crew1="ngModel" name="crew1" (change)="changeUpgrade(crew1)">
       <option value="" disabled selected hidden>Crew</option>
       <option value="">None</option>
@@ -145,8 +155,8 @@
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.crew3) }}</div>
   </div>
   <!-- Gunner 1 -->
-  <div class="ship__body__upgrade" >
-    <select class="ship__body__upgrade__control" [disabled]="!checkUpgrade('gunner1')" [(ngModel)]="ship.gunner1" #gunner1="ngModel" name="gunner1" (change)="changeUpgrade(gunner1)">
+  <div class="ship__body__upgrade" *ngIf="checkUpgrade('gunner1')">
+    <select class="ship__body__upgrade__control" [(ngModel)]="ship.gunner1" #gunner1="ngModel" name="gunner1" (change)="changeUpgrade(gunner1)">
       <option value="" disabled selected hidden>Gunner</option>
       <option value="">None</option>
       <option *ngFor="let upgrade of upgrades | forUpgrade: 'Gunner'" [ngValue]="upgrade.name">
@@ -183,17 +193,7 @@
         <span *ngIf="upgrade.unique">*</span>{{ upgrade.name }} ({{ upgrade.cost }})</option>
     </select>
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.turret) }}</div>
-  </div>
-  <!-- Title -->
-  <div class="ship__body__upgrade" *ngIf="ship.title !== undefined">
-    <select class="ship__body__upgrade__control" [(ngModel)]="ship.title" #title="ngModel" name="title" (change)="changeUpgrade(title)">
-      <option value="" disabled selected hidden>Title</option>
-      <option value="">None</option>
-      <option *ngFor="let upgrade of upgrades | forUpgrade: 'Title'" [ngValue]="upgrade.name">
-        <span *ngIf="upgrade.unique">*</span>{{ upgrade.name }} ({{ upgrade.cost }})</option>
-    </select>
-    <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.title) }}</div>
-  </div>
+  </div>  
   <!-- Device 1 -->
   <div class="ship__body__upgrade" *ngIf="ship.device1 !== undefined">
     <select class="ship__body__upgrade__control" [(ngModel)]="ship.device1" #device1="ngModel" name="device1" (change)="changeUpgrade(device1)">

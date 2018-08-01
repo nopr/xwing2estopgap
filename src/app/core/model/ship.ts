@@ -19,6 +19,7 @@ export class Ship {
   modification2: string;
   modification3: string;
   crew1: string;
+  crew1Restriction: string;
   crew2: string;
   crew3: string;
   gunner1: string;

@@ -76,22 +76,23 @@ export class ShipComponent implements OnInit {
 
   checkUpgrade(upgrade: string): boolean {
     const shipUpgrade = this.ship[`${upgrade}Restriction`];
+    if (!shipUpgrade && this.ship[upgrade] === undefined) return false;    
+    if (!shipUpgrade) return false;
 
-    if (!shipUpgrade && this.ship[upgrade] === undefined) return false;
-    if (!shipUpgrade && this.ship[upgrade] === '') return true;
-
-    const upgradeRequirement = shipUpgrade.split(":")[0];
+    let upgradeRequirement = shipUpgrade.split(":")[0];
     const requirementName = shipUpgrade.split(":")[1];
 
-    const requirementSet = this.ship[upgradeRequirement] === requirementName;
+    const isRemove = upgradeRequirement.startsWith('!');
+    upgradeRequirement = upgradeRequirement.replace('!','');
+    const requirementSet = !isRemove && this.ship[upgradeRequirement] === requirementName || isRemove && this.ship[upgradeRequirement] !== requirementName;
 
-    if (!requirementSet) this.ship[upgrade] = undefined;
+    if (!requirementSet) this.ship[upgrade] = '';
+    if (requirementSet && !this.ship[upgrade]) this.ship[upgrade] = ''
 
     return requirementSet;
   }
 
-  changeUpgrade(model: any) {
-    this.updateSquadPoints();
+  changeUpgrade(model: any) {    
     // Reset if blank
     if (model.value === '') {
       model.control.reset('');
