@@ -1051,7 +1051,7 @@ var ShipComponent = /** @class */ (function () {
         this.updatePoints.next();
     };
     ShipComponent.prototype.getUpgradeByName = function (upgrade) {
-        var upgrades = this.upgrades.filter(function (u) { return upgrade.split(',')[0].indexOf(u.name) > -1; });
+        var upgrades = this.upgrades.filter(function (u) { return upgrade == u.name; });
         return upgrades.length > 0 ? upgrades[0].ability : '';
     };
     ShipComponent.prototype.checkUpgrade = function (upgrade) {
