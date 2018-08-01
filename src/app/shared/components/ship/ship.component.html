@@ -55,7 +55,7 @@
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.talent) }}</div>
   </div>
   <!-- Sensor -->
-  <div class="ship__body__upgrade" *ngIf="ship.sensor !== undefined">
+  <div class="ship__body__upgrade" *ngIf="checkUpgrade('sensor')">
     <select class="ship__body__upgrade__control" [(ngModel)]="ship.sensor" #sensor="ngModel" name="sensor" (change)="changeUpgrade(sensor)">
       <option value="" disabled selected hidden>Sensor</option>
       <option value="">None</option>

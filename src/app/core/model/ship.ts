@@ -9,6 +9,7 @@ export class Ship {
   pilotAbility: string;
   talent: string;
   sensor: string;
+  sensorRestriction: string;
   cannon1: string;
   cannon1Restriction: string;
   cannon2: string;
