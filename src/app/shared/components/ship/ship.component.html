@@ -20,6 +20,9 @@
     </div>
     <div class="ship__stats__stat">
       <i class="xwing-miniatures-font xwing-miniatures-font-shield"></i>{{ ship.shields }}
+    </div>    
+    <div class="ship__stats__stat" *ngIf="ship.force > 0">
+      <i class="xwing-miniatures-font xwing-miniatures-font-forcecharge"></i><i class="xwing-miniatures-font xwing-miniatures-font-recurring"></i>{{ ship.force }}
     </div>
   </div>
 </div>
