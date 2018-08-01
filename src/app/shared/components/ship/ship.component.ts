@@ -69,11 +69,7 @@ export class ShipComponent implements OnInit {
   }
 
   checkUpgrade(upgrade: string): boolean {
-    console.log(upgrade);
-
     const shipUpgrade = this.ship[`${upgrade}Restriction`];
-
-    console.log(shipUpgrade);
     if (!shipUpgrade && this.ship[upgrade] === undefined) return false;
     if (!shipUpgrade) return true;
 
@@ -82,7 +78,7 @@ export class ShipComponent implements OnInit {
 
     const isRemove = upgradeRequirement.startsWith('!');
     upgradeRequirement = upgradeRequirement.replace('!','');
-    const requirementSet = !isRemove && this.ship[upgradeRequirement] === requirementName || isRemove && this.ship[upgradeRequirement] !== requirementName;
+    const requirementSet = !isRemove && this.ship[upgradeRequirement].name === requirementName || isRemove && this.ship[upgradeRequirement].name !== requirementName;
 
     if (!requirementSet) this.ship[upgrade] = '';
     if (requirementSet && !this.ship[upgrade]) this.ship[upgrade] = ''
