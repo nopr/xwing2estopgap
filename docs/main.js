@@ -1069,7 +1069,7 @@ var ShipComponent = /** @class */ (function () {
         if (!shipUpgrade && this.ship[upgrade] === undefined)
             return false;
         if (!shipUpgrade)
-            return false;
+            return true;
         var upgradeRequirement = shipUpgrade.split(":")[0];
         var requirementName = shipUpgrade.split(":")[1];
         var isRemove = upgradeRequirement.startsWith('!');

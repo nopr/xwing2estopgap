@@ -77,7 +77,7 @@ export class ShipComponent implements OnInit {
   checkUpgrade(upgrade: string): boolean {
     const shipUpgrade = this.ship[`${upgrade}Restriction`];
     if (!shipUpgrade && this.ship[upgrade] === undefined) return false;    
-    if (!shipUpgrade) return false;
+    if (!shipUpgrade) return true;
 
     let upgradeRequirement = shipUpgrade.split(":")[0];
     const requirementName = shipUpgrade.split(":")[1];
