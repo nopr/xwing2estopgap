@@ -162,7 +162,7 @@ export class DataService {
         let scum = new Ship(ship[0], ship[1], ship[2], ship[3], ship[4], ship[5], ship[6], ship[29], ship[32],ship[30],ship[31],ship[33],ship[34],ship[35]);
         scum.talent = scum.value(ship[7]);
         scum.sensor = scum.setValue('sensorRestriction', ship[8]);
-        scum.cannon1 = scum.value(ship[9]);
+        scum.cannon1 = scum.setValue('cannon1Restriction', ship[9]);
         scum.cannon2 = scum.value(ship[10]);
         scum.device1 = scum.value(ship[11]);
         scum.device2 = scum.setValue('device2Restriction', ship[12]);
