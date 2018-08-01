@@ -235,9 +235,5 @@ export class ShipComponent implements OnInit {
     this.attackValues = this.createPrettyAttackValues(this.ship.attack);
     this.actions = this.createPrettyActions(this.ship.actions);
 
-    // Todo: Dan I'm sorry, this looks hacky, but it works :D
-    this.form.valueChanges.subscribe(val => {
-      this.ship.torpedo1 = val['torpedo1'];
-    })
   }
 }

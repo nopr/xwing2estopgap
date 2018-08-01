@@ -94,10 +94,10 @@ export class SquadComponent implements OnInit {
     this.squad = input.squad;
   }
 
-  private pointsForUpgrade(ship: Ship, upgrades: Upgrade[], upgrade: Upgrade) {
+  private pointsForUpgrade(ship: Ship, upgrades: Upgrade[], upgrade: string) {
     if (!upgrade) return 0;
 
-    upgrades = upgrades.filter(u => upgrade.name.split(",")[0].indexOf(u.name) > -1);
+    upgrades = upgrades.filter(u => upgrade.split(",")[0].indexOf(u.name) > -1);
 
     if(upgrades.length === 0) return 0;
 
