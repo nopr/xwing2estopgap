@@ -507,7 +507,7 @@ var DataService = /** @class */ (function () {
                 rebel.illicit1 = rebel.value(ship[26]);
                 rebel.illicit2 = undefined;
                 rebel.tech = undefined;
-                rebel.forcePoints = parseInt(rebel.value(ship[34]));
+                rebel.forcePoints = parseInt(ship[34]);
                 ships.push(rebel);
             }
         });
@@ -565,7 +565,7 @@ var DataService = /** @class */ (function () {
                 imperial.illicit2 = undefined;
                 imperial.tech = undefined;
                 imperial.torpedo2 = imperial.value(ship[26]);
-                imperial.forcePoints = parseInt(imperial.value(ship[33]));
+                imperial.forcePoints = parseInt(ship[33]);
                 ships.push(imperial);
             }
         });
@@ -622,7 +622,7 @@ var DataService = /** @class */ (function () {
                 scum.force = scum.value(ship[27]);
                 scum.tech = scum.value(ship[27]);
                 scum.configuration = undefined;
-                scum.forcePoints = parseInt(scum.value(ship[36]));
+                scum.forcePoints = parseInt(ship[36]);
                 ships.push(scum);
             }
         });
@@ -1631,7 +1631,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! D:\code\xwing\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Code\XWing2EStopGap\src\main.ts */"./src/main.ts");
 
 
 /***/ })
