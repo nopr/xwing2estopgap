@@ -66,4 +66,3 @@ export class Ship {
     return value === 'TRUE' ? '' : value === '' ? undefined : undefined;
   }
 }
-
