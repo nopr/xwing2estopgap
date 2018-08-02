@@ -89,25 +89,20 @@ export class Ship {
 export class ShipValues {
   name: string;
   size: string;
-  actions: string;
+  actions: string[];
   agility: number;
-  upgrades: string;
   unique: boolean;
 
-  constructor(name: string, size: string, actions: string, agility: number, upgrades: string, unique: boolean) {
+  constructor(name: string, size: string, actions: string, agility: number, unique: boolean) {
     this.name = name;
-    this.size = size.toLowerCase();
+    this.size = size.toLowerCase()[0];
     this.actions = this.parseActions(actions);
     this.agility = agility;
-    this.upgrades = this.parseUpgrades(upgrades);
     this.unique = unique;
   }
 
-  parseActions(actions: string): string {
-    return '';
-  }
-
-  parseUpgrades(upgrades: string): string {
-    return '';
+  parseActions(actions: string): string[] {
+    const allActions = actions.toLowerCase().split('[').join('').split(']').join('').split(',');
+    return allActions;
   }
 }
