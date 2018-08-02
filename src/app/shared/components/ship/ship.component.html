@@ -132,7 +132,7 @@
     <select class="ship__body__upgrade__control" [(ngModel)]="ship.crew1" #crew1="ngModel" name="crew1" (change)="changeUpgrade(crew1)">
       <option value="" disabled selected hidden>Crew</option>
       <option value="">None</option>
-      <option *ngFor="let upgrade of upgrades | forUpgrade: 'Crew'" [ngValue]="upgrade">
+      <option *ngFor="let upgrade of upgrades | forUpgrade: 'Crew':ship" [ngValue]="upgrade">
         <span *ngIf="upgrade.unique">*</span>{{ upgrade.name }} ({{ upgrade.cost }})</option>
     </select>
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.crew1) }}</div>
@@ -142,7 +142,7 @@
     <select class="ship__body__upgrade__control" [(ngModel)]="ship.crew2" #crew2="ngModel" name="crew2" (change)="changeUpgrade(crew2)">
       <option value="" disabled selected hidden>Crew</option>
       <option value="">None</option>
-      <option *ngFor="let upgrade of upgrades | forUpgrade: 'Crew'" [ngValue]="upgrade">
+      <option *ngFor="let upgrade of upgrades | forUpgrade: 'Crew':ship" [ngValue]="upgrade">
         <span *ngIf="upgrade.unique">*</span>{{ upgrade.name }} ({{ upgrade.cost }})</option>
     </select>
     <div class="ship__body__upgrade__details" *ngIf="showAbilities">{{ getUpgradeByName(ship.crew2) }}</div>
