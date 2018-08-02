@@ -50,6 +50,7 @@ export class Ship {
   actions: string;
   forcePoints: number;
   totalCost: number;
+  restrictions: ShipValues;
 
   constructor(name: string, cost: string, pilot: string, unique: string, faction: string, shipAbility: string, pilotAbility: string, size: string, agility: string, initiative: string, attack: string, hull: string, shields: string, actions: string) {
     this.name = name;
@@ -85,3 +86,28 @@ export class Ship {
   }
 }
 
+export class ShipValues {
+  name: string;
+  size: string;
+  actions: string;
+  agility: number;
+  upgrades: string;
+  unique: boolean;
+
+  constructor(name: string, size: string, actions: string, agility: number, upgrades: string, unique: boolean) {
+    this.name = name;
+    this.size = size.toLowerCase();
+    this.actions = this.parseActions(actions);
+    this.agility = agility;
+    this.upgrades = this.parseUpgrades(upgrades);
+    this.unique = unique;
+  }
+
+  parseActions(actions: string): string {
+    return '';
+  }
+
+  parseUpgrades(upgrades: string): string {
+    return '';
+  }
+}
