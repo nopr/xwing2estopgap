@@ -14,6 +14,7 @@ export class ShipComponent implements OnInit {
   isCollapsed: boolean = false;
   actions: string[];
   attackValues: any[];
+  cost: number;
 
   @HostBinding('class.ship') attrClass: boolean = true;
 
@@ -24,9 +25,6 @@ export class ShipComponent implements OnInit {
   @Input() squad: Ship[];
   @Input() ship: Ship;
   @Input() index: number;
-  @Input() points: number;
-
-  @Output() updatePoints = new EventEmitter<number>();
 
   constructor() {}
 
@@ -48,7 +46,7 @@ export class ShipComponent implements OnInit {
 
     this.ship[upgrade] = `${newValue},${splitUpgrade[1]}`;
 
-    this.updateSquadPoints();
+    // this.updateSquadPoints();
 
     return ship[upgrade];
   }
@@ -62,21 +60,17 @@ export class ShipComponent implements OnInit {
     this.squad.splice(this.index, 1);
   }
 
-  updateSquadPoints() {
-    this.updatePoints.next();
-  }
-
-  getUpgradeByName(upgrade: string): string {
+  getUpgradeByName(upgrade: Upgrade): string {
     if (!upgrade) return '';
 
-    const upgrades = this.upgrades.filter(u => upgrade === u.name);
+    const upgrades = this.upgrades.filter(u => upgrade.name === u.name);
 
     return upgrades.length > 0 ? upgrades[0].ability : '';
   }
 
   checkUpgrade(upgrade: string): boolean {
     const shipUpgrade = this.ship[`${upgrade}Restriction`];
-    if (!shipUpgrade && this.ship[upgrade] === undefined) return false;    
+    if (!shipUpgrade && this.ship[upgrade] === undefined) return false;
     if (!shipUpgrade) return true;
 
     let upgradeRequirement = shipUpgrade.split(":")[0];
@@ -84,7 +78,7 @@ export class ShipComponent implements OnInit {
 
     const isRemove = upgradeRequirement.startsWith('!');
     upgradeRequirement = upgradeRequirement.replace('!','');
-    const requirementSet = !isRemove && this.ship[upgradeRequirement] === requirementName || isRemove && this.ship[upgradeRequirement] !== requirementName;
+    const requirementSet = !isRemove && this.ship[upgradeRequirement].name === requirementName || isRemove && this.ship[upgradeRequirement].name !== requirementName;
 
     if (!requirementSet) this.ship[upgrade] = '';
     if (requirementSet && !this.ship[upgrade]) this.ship[upgrade] = ''
@@ -92,7 +86,7 @@ export class ShipComponent implements OnInit {
     return requirementSet;
   }
 
-  changeUpgrade(model: any) {    
+  changeUpgrade(model: any) {
     // Reset if blank
     if (model.value === '') {
       model.control.reset('');
@@ -219,10 +213,26 @@ export class ShipComponent implements OnInit {
     return values;
   }
 
+  updatePoints(): void {
+    let cost: number = 0;
+
+    this.form.valueChanges.subscribe((value) => {
+      cost = this.ship.cost;
+
+      Object.keys(value).forEach((upgrade) => {
+        if (this.form.controls[upgrade].value.cost) {
+          cost = cost + parseInt(this.form.controls[upgrade].value.cost);
+        }
+      });
+
+      this.cost = cost;
+    });
+  }
+
   ngOnInit(): void {
     this.updateUpgradeStatus();
+    this.updatePoints();
     this.attackValues = this.createPrettyAttackValues(this.ship.attack);
     this.actions = this.createPrettyActions(this.ship.actions);
-
   }
 }
